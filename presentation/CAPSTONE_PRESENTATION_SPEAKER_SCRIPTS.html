@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>B.Tech Capstone Presentation Defense Handbook & Speaker Scripts</title>
+<style>
+    @page {
+        size: A4;
+        margin: 18mm 15mm 18mm 15mm;
+        @bottom-right {
+            content: counter(page);
+        }
+    }
+    body {
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+        font-size: 10pt;
+        line-height: 1.55;
+        color: #1e293b;
+        background-color: #ffffff;
+    }
+    .page-break {
+        page-break-before: always;
+    }
+    h1 {
+        color: #0f172a;
+        font-size: 18pt;
+        border-bottom: 2.5px solid #f59e0b;
+        padding-bottom: 5px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    h2 {
+        color: #d97706;
+        font-size: 13pt;
+        margin-top: 12px;
+        margin-bottom: 6px;
+    }
+    h3 {
+        color: #0f172a;
+        font-size: 11pt;
+        background-color: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 5px 10px;
+        margin-top: 15px;
+        margin-bottom: 8px;
+    }
+    blockquote {
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        margin: 8px 0;
+        padding: 10px 14px;
+        font-size: 9.5pt;
+        font-style: italic;
+        color: #334155;
+        line-height: 1.6;
+    }
+    blockquote strong {
+        color: #0f172a;
+        font-style: normal;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0 15px 0;
+        font-size: 8.5pt;
+    }
+    th {
+        background-color: #0f172a;
+        color: #f8fafc;
+        text-align: left;
+        padding: 7px 10px;
+        font-weight: 600;
+        border: 1px solid #334155;
+    }
+    td {
+        padding: 6px 10px;
+        border: 1px solid #cbd5e1;
+        vertical-align: top;
+    }
+    tr:nth-child(even) td {
+        background-color: #f8fafc;
+    }
+    ul, ol {
+        margin: 6px 0 10px 20px;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 4px;
+    }
+    strong {
+        color: #0f172a;
+    }
+    code {
+        background-color: #f1f5f9;
+        color: #b45309;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-family: Consolas, monospace;
+        font-size: 8.5pt;
+    }
+    hr {
+        border: 0;
+        height: 1px;
+        background: #e2e8f0;
+        margin: 15px 0;
+    }
+</style>
+</head>
+<body>
+<h1>🎙️ B.Tech Capstone Presentation Defense Handbook &amp; Speaker Scripts</h1>
+<h2>Comparative Analysis of Traditional and AI-Driven Threat Detection (AI-WAF)</h2>
+<h3><strong>K.R. Mangalam University • School of Engineering &amp; Technology</strong></h3>
+<p><strong>Department of Computer Science &amp; Engineering | Academic Session 2025–2026</strong></p>
+<hr />
+<h3><strong>Project &amp; Team Information</strong></h3>
+<ul>
+<li><strong>Project Title:</strong> Comparative Analysis of Traditional and AI-Driven Threat Detection Techniques in Cybersecurity: Design, Implementation, and Evaluation of an Autonomous, Low-Latency AI-Powered Web Application Firewall (AI-WAF)</li>
+<li><strong>Program:</strong> Bachelor of Technology (B.Tech) — Computer Science &amp; Engineering (AI / ML Specialization)</li>
+<li><strong>Project Team Members:</strong><ol>
+<li><strong>Anant Soni</strong> (Roll No: 2301730095)</li>
+<li><strong>Pabitra Giri</strong> (Roll No: 2301730081)</li>
+<li><strong>Anurag Pandey</strong> (Roll No: 2301730094)</li>
+<li><strong>Saksham Pachauri</strong> (Roll No: 2301730060)</li>
+<li><strong>Piyush Gauswami</strong> (Roll No: 2301730062)</li>
+</ol>
+</li>
+<li><strong>Live Streamlit SOC Deployment:</strong> <a href="https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/">https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/</a></li>
+<li><strong>GitHub Repository:</strong> <a href="https://github.com/AnantSoni360/capstone-project">https://github.com/AnantSoni360/capstone-project</a></li>
+</ul>
+<hr />
+<h2>⏱️ Recommended 5-Member Team Presentation Strategy (20 Minutes Total)</h2>
+<p>To ensure balanced participation and smooth pacing (~1 minute per slide), the presentation is structured across 5 speaker slots (4 slides per speaker):</p>
+<table>
+<thead>
+<tr>
+  <th style="text-align:center">Speaker</th>
+  <th style="text-align:left">Team Member</th>
+  <th style="text-align:center">Assigned Slides</th>
+  <th style="text-align:left">Topics Covered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:center"><strong>Speaker 1</strong></td>
+  <td style="text-align:left"><strong>Anant Soni</strong></td>
+  <td style="text-align:center"><strong>Slides 1 – 4</strong></td>
+  <td style="text-align:left">Title &amp; Introduction, Executive Summary, The WAF Trilemma, System Architecture</td>
+</tr>
+<tr>
+  <td style="text-align:center"><strong>Speaker 2</strong></td>
+  <td style="text-align:left"><strong>Pabitra Giri</strong></td>
+  <td style="text-align:center"><strong>Slides 5 – 8</strong></td>
+  <td style="text-align:left">Dataset Deduplication Hygiene, Dual-Domain Features, Classical ML Baselines, PyTorch 1D-CNN</td>
+</tr>
+<tr>
+  <td style="text-align:center"><strong>Speaker 3</strong></td>
+  <td style="text-align:left"><strong>Anurag Pandey</strong></td>
+  <td style="text-align:center"><strong>Slides 9 – 12</strong></td>
+  <td style="text-align:left">Multi-Tier Decision Engine, Ablation Study, Granular Vulnerability Detection, Adversarial Robustness</td>
+</tr>
+<tr>
+  <td style="text-align:center"><strong>Speaker 4</strong></td>
+  <td style="text-align:left"><strong>Saksham Pachauri</strong></td>
+  <td style="text-align:center"><strong>Slides 13 – 16</strong></td>
+  <td style="text-align:left">False-Positive Boundary Calibration, TreeSHAP Explainability, Concurrency Benchmarks, Zero-Bypass Gateway</td>
+</tr>
+<tr>
+  <td style="text-align:center"><strong>Speaker 5</strong></td>
+  <td style="text-align:left"><strong>Piyush Gauswami</strong></td>
+  <td style="text-align:center"><strong>Slides 17 – 20</strong></td>
+  <td style="text-align:left">Live SOC Dashboard Demo, Comparative Synthesis Matrix, Hardware Profiling &amp; Scope, Conclusion &amp; Q&amp;A</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<h1>Slide-by-Slide Complete Speaker Scripts (~1 Minute Each)</h1>
+<hr />
+<h3><strong>Slide 1: Title &amp; Team Introductions</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 1 (Anant Soni)</li>
+<li><strong>Timing:</strong> ~50–55 seconds | <strong>Word Count:</strong> 125 words</li>
+<li><strong>Visuals on Screen:</strong> University branding banner, project title, and team member roll numbers.</li>
+</ul>
+<blockquote>
+<p><em>&quot;Good morning, respected members of the evaluation committee and faculty guides. Today, our team is presenting our B.Tech Capstone Project titled: <strong>'Comparative Analysis of Traditional and AI-Driven Threat Detection Techniques in Cybersecurity: Design, Implementation, and Evaluation of an Autonomous, Low-Latency AI-Powered Web Application Firewall'</strong>.</em></p>
+<p><em>This work was conducted under the Department of Computer Science &amp; Engineering at <strong>K.R. Mangalam University</strong>.</em></p>
+<p><em>Our project team consists of <strong>Anant Soni, Pabitra Giri, Anurag Pandey, Saksham Pachauri, and Piyush Gauswami</strong>, specializing in Artificial Intelligence and Machine Learning. Over the next twenty minutes, we will present the critical vulnerabilities in existing firewalls, our hybrid multi-model architecture, our verified empirical findings, and a live demonstration of our production security gateway.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Establishes formal academic rigor and clear team ownership right from the start.</li>
+</ul>
+<hr />
+<h3><strong>Slide 2: Executive Summary &amp; Project Motivation</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 1 (Anant Soni)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> 4 Golden Metric Tiles (95.13% Acc, 0.41% FPR, 5.56ms Latency, 100% SQLi/XSS) + Problem vs Solution cards.</li>
+</ul>
+<blockquote>
+<p><em>&quot;To provide an executive summary: Web applications today account for over <strong>43% of enterprise breaches</strong>, primarily through injection attacks. The industry standard firewall—ModSecurity with OWASP Core Rules—relies on static regular expressions that suffer an alarming <strong>78% evasion rate</strong> when attackers use basic obfuscation.</em></p>
+<p><em>Conversely, monolithic deep learning models introduce heavy inference overhead exceeding 50 milliseconds, violating enterprise web latency budgets.</em></p>
+<p><em>Our capstone resolves this fundamental dilemma through an autonomous <strong>Multi-Tier Hybrid Architecture</strong>. As highlighted in our top metric cards, our system achieves a <strong>95.13% overall test accuracy</strong>, a <strong>100% detection rate on real SQL injection and Cross-Site Scripting exploits</strong>, and a near-zero <strong>false-alarm rate of 0.41%</strong>, while maintaining an ultra-fast average inline inspection latency of just <strong>5.56 milliseconds</strong>.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Demonstrates awareness of real-world industry pain points with verified quantitative metrics.</li>
+</ul>
+<hr />
+<h3><strong>Slide 3: Research Context &amp; The WAF Trilemma</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 1 (Anant Soni)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 130 words</li>
+<li><strong>Visuals on Screen:</strong> The WAF Trilemma breakdown + Comparative Research Gap Matrix Table.</li>
+</ul>
+<blockquote>
+<p><em>&quot;Every enterprise Web Application Firewall faces what we define as the <strong>WAF Trilemma</strong>: the constant trade-off between <strong>High Detection Accuracy</strong>, <strong>Low Inline Latency (&lt; 15 ms)</strong>, and <strong>Minimal False Positives (&lt; 1%)</strong>.</em></p>
+<p><em>If you tighten traditional regular expressions to catch attacks, you increase false positives and inadvertently block legitimate, paying customers. If you relax the rules, attackers bypass them using SQL comment injections, mixed-case lettering, and double URL encoding.</em></p>
+<p><em>As illustrated in our comparative matrix on the right, traditional rules fail under obfuscation with only 4.2% recall. Standalone machine learning models reduce blind spots but lack explainability. Our hybrid architecture is engineered specifically to eliminate these trade-offs, delivering sub-6ms latency, robust zero-day evasion resilience, and full mathematical explainability.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Explains why you cannot simply add more regex rules—it destroys user experience.</li>
+</ul>
+<hr />
+<h3><strong>Slide 4: System Architecture &amp; End-to-End Pipeline</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 1 (Anant Soni)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> Defense-in-Depth network diagram + Component Mapping Table (Nginx, FastAPI, Docker bridge).</li>
+</ul>
+<blockquote>
+<p><em>&quot;This slide details our end-to-end gateway architecture. Rather than deploying as an application-level library, our system is engineered as an <strong>infrastructure reverse proxy gateway</strong>.</em></p>
+<p><em>External clients connect to an <strong>Nginx reverse proxy</strong> on Port 80. For every incoming request, Nginx triggers a synchronous subrequest via the native <code>auth_request</code> directive to our <strong>FastAPI AI inspection microservice</strong>.</em></p>
+<p><em>Here is the critical security guarantee: the target web application has <strong>zero open host ports</strong>—it is physically isolated on an internal Docker bridge network (<code>waf_internal</code>). If our inspection engine calculates a threat score of 0.65 or above, Nginx immediately terminates the connection with an HTTP 403 Forbidden. The malicious payload <strong>never physically reaches the target origin server</strong>, guaranteeing zero-bypass security.</em></p>
+<p><em>Now, I hand over to Pabitra to walk through our dataset engineering and machine learning pipeline.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> The target application is physically unreachable from the outside; only inspected traffic can pass.</li>
+</ul>
+<hr />
+<div class="page-break"></div>
+
+<h3><strong>Slide 5: Dataset Engineering &amp; CSIC 2010 Deduplication</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 2 (Pabitra Giri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 140 words</li>
+<li><strong>Visuals on Screen:</strong> CSIC 2010 processing pipeline + Class Distribution Chart (<code>class_distribution.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;Thank you, Anant. A critical contribution of our project lies in rigorous dataset hygiene. We evaluated our system on the benchmark <strong>CSIC 2010 HTTP Dataset</strong>, comprising 61,065 raw requests.</em></p>
+<p><em>During exploratory data analysis, we discovered a massive academic flaw in the raw corpus: <strong>35,457 requests—representing 58.06% of the dataset—were exact synthetic duplicates</strong>.</em></p>
+<p><em>If a project trains and tests on duplicated data, the model simply memorizes hashes, causing severe <strong>Data Leakage</strong> and reporting falsely inflated 99% accuracy. We eliminated all duplicates to establish <strong>25,608 unique real-world requests</strong>.</em></p>
+<p><em>As shown in the class distribution chart on the right, we partitioned this into 70% Train, 15% Validation, and 15% Frozen Test ($N = 3,842$), verifying <strong>0.00% leakage overlap</strong> across all partitions for true academic rigor.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> You detected and solved a real data hygiene flaw; your 95% accuracy is honest and generalizable.</li>
+</ul>
+<hr />
+<h3><strong>Slide 6: Dual-Domain Feature Engineering</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 2 (Pabitra Giri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> 22 Handcrafted tabular features breakdown + 256-token character ASCII embeddings + Special Character Frequency Chart.</li>
+</ul>
+<blockquote>
+<p><em>&quot;To feed HTTP traffic into machine learning models, we developed a <strong>Dual-Domain Feature Pipeline</strong>.</em></p>
+<p><em>For our tabular boosting model, we extract <strong>22 handcrafted statistical features</strong>. This includes <strong>Shannon Information Entropy</strong> to quantify randomness—since obfuscated shellcode exhibits entropy above 4.2 compared to standard text around 3.0. We also extract special delimiter ratios for single quotes, semicolons, dashes, and slashes, alongside SQL and XSS keyword counters.</em></p>
+<p><em>For our deep learning model, we normalize sequences into a fixed 256-character window, mapping 100 printable ASCII tokens into <strong>64-dimensional learned continuous embeddings</strong>.</em></p>
+<p><em>The figure on the right demonstrates the sharp statistical divergence in special character density between benign traffic in green and attack traffic in red.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> You combine domain-knowledge cybersecurity statistics with raw character sequence embeddings.</li>
+</ul>
+<hr />
+<h3><strong>Slide 7: Classical ML Exploration &amp; Baselines</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 2 (Pabitra Giri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 130 words</li>
+<li><strong>Visuals on Screen:</strong> Benchmark comparison of 5 classical algorithms + Classical Performance &amp; ROC Curves Chart (<code>ml_models_comparison.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;On this slide, we present our exploration of classical supervised algorithms evaluated across our 22 tabular features.</em></p>
+<p><em>We benchmarked Logistic Regression, Linear SVM, Random Forest, LightGBM, and XGBoost. While Logistic Regression was fast, its linear hyperplane could not resolve non-linear delimiter combinations, stalling at 79.2% accuracy. Random Forest achieved strong recall but had a 45 MB memory footprint and slower tree traversal.</em></p>
+<p><em>As seen in the ROC curves on the right, <strong>XGBoost emerged as our clear classical champion</strong>, achieving an <strong>AUC of 0.9732, 90.94% accuracy, 96.42% precision, and a blistering 0.45 ms inference latency</strong>. This performance earned XGBoost its place as our Tier 2 tabular engine.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> XGBoost was chosen after empirical benchmarking against 4 other classical models.</li>
+</ul>
+<hr />
+<h3><strong>Slide 8: Deep Learning Architecture (PyTorch 1D-CNN)</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 2 (Pabitra Giri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> 1D-CNN layer specifications + Training &amp; Validation Loss Curves (<code>dl_training_curves.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;To catch attacks that bypass word-level statistics, we engineered a custom <strong>character-level PyTorch 1D-CNN</strong>. We avoided recurrent LSTMs because their sequential token processing causes latency bottlenecks.</em></p>
+<p><em>Our 1D-CNN uses parallel convolutional filters with kernel sizes of <strong>3, 5, and 7</strong>, acting as multi-scale n-gram detectors that capture 3-letter tokens like <code>OR </code>, 5-letter tokens like <code>UNION</code>, and 7-letter tags like <code>&lt;SCRIPT&gt;</code> anywhere in the string.</em></p>
+<p><em>These features are batch-normalized, pooled via Adaptive Max Pooling, and passed through regularized dense layers with Dropout.</em></p>
+<p><em>As demonstrated in the training curves on the right, our 1D-CNN achieves smooth convergence without overfitting, delivering <strong>94.35% test accuracy, 99.86% precision, and only 0.596 ms latency</strong>.</em></p>
+<p><em>I now invite Anurag to present our decision consensus and experimental ablation results.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Kernels 3, 5, and 7 extract character n-grams in parallel with sub-millisecond execution.</li>
+</ul>
+<hr />
+<div class="page-break"></div>
+
+<h3><strong>Slide 9: Enforcement Engine &amp; Tri-State Policy</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 3 (Anurag Pandey)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> Cascaded triage workflow + Tri-State Policy Matrix Table (ALLOW, REVIEW, BLOCK).</li>
+</ul>
+<blockquote>
+<p><em>&quot;Thank you, Pabitra. This slide explains our cascaded decision logic and tri-state triage policy.</em></p>
+<p><em>When an HTTP request enters the gateway, it first encounters <strong>Tier 1: a Heuristic Regex Fast Path</strong>. Blatant, un-obfuscated CVE signatures are dropped immediately in <strong>under 0.15 milliseconds</strong>, without invoking AI.</em></p>
+<p><em>If ambiguous, the request enters <strong>Tier 2 (XGBoost)</strong> and <strong>Tier 3 (1D-CNN)</strong> in parallel, generating a fused threat probability: $P = 0.55 \cdot P_{	ext{CNN}} + 0.45 \cdot P_{	ext{XGBoost}}$.</em></p>
+<p><em>Rather than a rigid binary cutoff, we implement a <strong>Calibrated Tri-State Policy</strong>: scores under 0.35 are <strong>ALLOWED</strong>; scores of 0.65 and above are <strong>BLOCKED</strong>; and boundary scores between 0.35 and 0.65 are routed to <strong>REVIEW</strong>—passed with an alert header to protect legitimate user traffic.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Dual-threshold calibration avoids the catastrophic false alarms of a single 0.50 cutoff.</li>
+</ul>
+<hr />
+<h3><strong>Slide 10: Complete Ablation Study &amp; Justification</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 3 (Anurag Pandey)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 140 words</li>
+<li><strong>Visuals on Screen:</strong> Ablation metrics table + Ablation Performance Comparison Chart (<code>ablation_study_comparison.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;To prove that every tier in our architecture is necessary, we conducted an exhaustive ablation study across our frozen test set of 3,842 requests.</em></p>
+<p>*Looking at the table and chart on the right:</p>
+<ul>
+<li>The <strong>Rule Engine alone</strong> achieves only 51.33% accuracy with a disastrous <strong>78.08% False Negative Rate</strong>—missing four out of five attacks.</li>
+<li><strong>XGBoost alone</strong> jumps to 90.94% accuracy but lacks spatial character awareness.</li>
+<li><strong>1D-CNN alone</strong> delivers 94.35% accuracy and 99.86% precision.</li>
+<li>When combined into our <strong>Full Hybrid Ensemble</strong>, we achieve our state-of-the-art peak: <strong>95.13% accuracy, 99.73% precision, 92.44% recall, and an inline latency of 5.56 milliseconds</strong>.*</li>
+</ul>
+<p><em>This empirically confirms that combining rules, boosting, and deep convolutions yields the most resilient defense.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> You have empirical evidence proving why every single component was added.</li>
+</ul>
+<hr />
+<h3><strong>Slide 11: Granular Vulnerability Evaluation</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 3 (Anurag Pandey)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 130 words</li>
+<li><strong>Visuals on Screen:</strong> Granular metrics breakdown + Detection Rate by Threat Category Bar Chart (<code>class_specific_detection_rates.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;Here, we evaluate our system's granular detection rates across specific attack categories on the held-out test partition.</em></p>
+<p>*As shown in the bar chart:</p>
+<ul>
+<li>On <strong>SQL Injection</strong>, our Hybrid Ensemble detected <strong>246 out of 246 attacks—a 100.0% detection rate</strong> across error-based and boolean-blind vectors.</li>
+<li>On <strong>Cross-Site Scripting (XSS)</strong>, the system caught <strong>144 out of 144 attacks—also 100.0% detection</strong> across reflected tags, event handlers, and iframe injections.</li>
+<li>Crucially, out of 1,447 clean, benign production requests, <strong>1,441 were correctly passed</strong>, representing a <strong>99.59% normal pass rate and a false-positive rate of just 0.41%</strong>.*</li>
+</ul>
+<p><em>Our firewall reliably stops dangerous exploits without degrading genuine user traffic.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> 100% detection on both SQLi and XSS on the frozen test partition.</li>
+</ul>
+<hr />
+<h3><strong>Slide 12: Adversarial Robustness &amp; Evasion Stress Test</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 3 (Anurag Pandey)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 140 words</li>
+<li><strong>Visuals on Screen:</strong> 7 Mutation vectors breakdown + Comparative Degradation Curves (<code>robustness_degradation_comparison.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;Next, we stress-tested our firewall against <strong>7 adversarial evasion techniques</strong>: URL percent encoding, double encoding, mixed casing, inline SQL comments, whitespace substitution, and HTML entities.</em></p>
+<p>*The dual-panel graph on the right illustrates our findings:</p>
+<ul>
+<li>Panel A shows that without normalization, traditional rules collapse from 21.9% down to an abysmal <strong>4.2% detection rate</strong>—letting 95% of attacks slip through.</li>
+<li>Panel B shows the performance of our integrated pipeline with recursive unquoting and character convolutions. Our AI-WAF maintains an average detection rate of <strong>91.8% across all evasion vectors</strong>.*</li>
+</ul>
+<p><em>Our preprocessor and character-level embeddings effectively neutralize syntactic obfuscation, proving that the model learns actual attack semantics rather than brittle keyword strings.</em></p>
+<p><em>I now hand over to Saksham to discuss false-positive boundary calibration and model explainability.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Rules drop to 4.2% under mutation; our AI-WAF holds strong above 91%.</li>
+</ul>
+<hr />
+<div class="page-break"></div>
+
+<h3><strong>Slide 13: False-Positive Boundary Benchmark</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 4 (Saksham Pachauri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> 160 Legitimate edge cases breakdown + Threat Score Distribution Chart (<code>false_positive_boundary_distribution.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;Thank you, Anurag. In enterprise production, false alarms destroy revenue. If an e-commerce firewall blocks a customer whose name is <em>O'Connor</em> or who orders <em>L'Oreal</em> shampoo, that customer is lost.</em></p>
+<p><em>We evaluated <strong>160 complex legitimate edge cases</strong>: names with apostrophes, forum posts containing code syntax like <code>x &lt; 5 and y &gt; 2</code>, Base64 session cookies, and nested JSON payloads.</em></p>
+<p><em>As shown in the distribution chart, a standard single threshold at 0.50 blocked 30% of these benign requests. Our <strong>calibrated dual-threshold policy</strong> safely routes these boundary inputs into the REVIEW state, <strong>eliminating 91% of false alarms</strong> and keeping false blocks at just 0.41% while maintaining full attack coverage.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Dual-threshold calibration protects paying customers while flagging edge cases for SOC audit.</li>
+</ul>
+<hr />
+<h3><strong>Slide 14: Explainable AI (TreeSHAP Attribution)</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 4 (Saksham Pachauri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> TreeSHAP mathematical formulation + Feature Attribution Beeswarm Plot (<code>shap_summary.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;A critical requirement in modern cybersecurity compliance is explainability. Enterprise SOC teams refuse to deploy 'black-box' neural networks that cannot provide an audit trail for blocked requests.</em></p>
+<p><em>To solve this, we integrated <strong>TreeSHAP (Shapley Additive Explanations)</strong> based on cooperative game theory.</em></p>
+<p>*The beeswarm plot on the right highlights the global risk drivers:</p>
+<ul>
+<li>High special character ratios and SQL keyword frequencies exhibit strong positive SHAP values pushing predictions toward BLOCK.</li>
+<li>Common alphanumeric paths exhibit negative SHAP values maintaining ALLOW.*</li>
+</ul>
+<p><em>Whenever our gateway blocks a transaction, TreeSHAP calculates the exact marginal feature contributions in real time, rendering a visual explanation directly in the SOC dashboard.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> You provide mathematically grounded audit trails for every security decision.</li>
+</ul>
+<hr />
+<h3><strong>Slide 15: Concurrency &amp; Latency Benchmarking</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 4 (Saksham Pachauri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 130 words</li>
+<li><strong>Visuals on Screen:</strong> Latency percentiles vs concurrency curve + Throughput Scaling Bar Chart (<code>concurrency_latency_benchmark.png</code>).</li>
+</ul>
+<blockquote>
+<p><em>&quot;To prove enterprise throughput scalability, we benchmarked our gateway under increasing load up to <strong>50 concurrent client connections</strong>.</em></p>
+<p>*Looking at the percentile curves on the left:</p>
+<ul>
+<li>Median latency ($p_{50}$) is <strong>5.12 milliseconds</strong>.</li>
+<li>95th percentile latency ($p_{95}$) is <strong>8.44 milliseconds</strong>.</li>
+<li>99th percentile latency ($p_{99}$) is <strong>11.28 milliseconds</strong>—strictly below our 15.0 ms production SLA ceiling.*</li>
+</ul>
+<p><em>As shown in the throughput bars on the right, the single-host gateway sustains <strong>152 to 179 requests per second</strong> under sustained load with zero dropped connections and a flat 1.15 GB RAM footprint, proving that our AI inference adds negligible overhead to production traffic.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Throughput and p99 latency strictly adhere to production web performance budgets.</li>
+</ul>
+<hr />
+<h3><strong>Slide 16: Zero-Bypass Gateway Security Verification</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 4 (Saksham Pachauri)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> Gateway protocol verification matrix table (GET, POST, PUT, JSON, Multipart, Malformed).</li>
+</ul>
+<blockquote>
+<p><em>&quot;This slide demonstrates our gateway security audit. We subjected our Nginx <code>auth_request</code> configuration to an exhaustive protocol verification matrix covering HTTP GET, POST, PUT, DELETE, JSON, and multipart form data, with payload sizes from 128 bytes to 10 megabytes.</em></p>
+<p><em>In every attack test scenario, the subrequest returned an HTTP 403 Forbidden in under 4 milliseconds. Because Nginx immediately drops the connection, our backend origin access logs recorded <strong>exactly zero packet arrivals</strong>.</em></p>
+<p><em>Furthermore, we verified fail-closed hardening: when corrupt headers or scanner timeouts were injected, the gateway safely defaulted to dropping the connection, ensuring that no request ever bypasses inspection.</em></p>
+<p><em>I now hand over to Piyush to present our live SOC dashboard and final synthesis.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Attack payloads are dropped at the gateway; 0% packet leakage to upstream servers.</li>
+</ul>
+<hr />
+<div class="page-break"></div>
+
+<h3><strong>Slide 17: Interactive SOC Dashboard (Live Demo)</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 5 (Piyush Gauswami)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> Live Streamlit SOC Dashboard Screenshot (<code>dashboard_soc_screenshot.png</code>) + Public Cloud Deployment Link.</li>
+</ul>
+<blockquote>
+<p><em>&quot;Thank you, Saksham. To give security operators real-time observability, we developed a production-ready <strong>Security Operations Center (SOC) dashboard</strong> in Streamlit.</em></p>
+<p>*As captured in the screenshot:</p>
+<ul>
+<li>The top telemetry cards display live counts for Total Inspected, Legitimate Traffic, Blocked Attacks, and Review incidents.</li>
+<li>The center bar chart breaks down detected attack vectors in real time.</li>
+<li>The right panel provides live SLA latency gauges.*</li>
+</ul>
+<p><em>The dashboard also features an <strong>Interactive Payload Scanner</strong> where analysts can paste raw HTTP requests to view instant model probabilities and SHAP feature waterfalls. It is deployed and publicly accessible right now on Streamlit Cloud at <strong>capstone-project.streamlit.app</strong>.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> You have a working, publicly deployed cloud demonstration ready for examiners to test live.</li>
+</ul>
+<hr />
+<h3><strong>Slide 18: Comparative Paradigm Synthesis</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 5 (Piyush Gauswami)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 140 words</li>
+<li><strong>Visuals on Screen:</strong> Master final benchmark across all systems chart (<code>master_model_benchmark.png</code>).</li>
+</ul>
+<blockquote>
+<p>*&quot;This slide summarizes our core academic findings comparing all four threat detection paradigms:</p>
+<ol>
+<li><strong>Traditional Regex (ModSecurity):</strong> Incredibly fast at 0.12 ms, but completely blind to obfuscation with a 78% evasion rate.</li>
+<li><strong>Standalone XGBoost:</strong> High tabular accuracy at 90.94%, but vulnerable to novel character substitutions.</li>
+<li><strong>Standalone PyTorch 1D-CNN:</strong> Exceptional precision at 99.86%, but lacks fast-path heuristic shortcuts for obvious attacks.</li>
+<li><strong>Our Proposed Hybrid AI-WAF:</strong> The optimal engineering synthesis—achieving <strong>95.13% accuracy, 100% recall on SQLi and XSS, a 0.41% false-alarm rate, and 5.56 ms latency</strong>.*</li>
+</ol>
+<p><em>As shown in the master benchmark chart, our hybrid ensemble outperforms every individual model across balanced F1-score and operational safety.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> High-level executive synthesis summarizing the entire experimental comparative study.</li>
+</ul>
+<hr />
+<h3><strong>Slide 19: Hardware Constraints &amp; Future Scope</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 5 (Piyush Gauswami)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 135 words</li>
+<li><strong>Visuals on Screen:</strong> 3 Structured Cards: Hardware Profiling, Current Limitations, Future Research Scope.</li>
+</ul>
+<blockquote>
+<p><em>&quot;Regarding operational viability: our entire 4-container Docker stack was benchmarked on standard commodity laptop hardware—an Intel i5/i7 processor with 16 GB of RAM and an NVIDIA GTX 1650 GPU. Peak resource utilization remained under <strong>1.2 GB of RAM and under 15% CPU</strong>, demonstrating that small-to-medium enterprises can deploy this system without costly cloud infrastructure.</em></p>
+<p>*For future research, we have identified three expansion pathways:</p>
+<ol>
+<li>Packaging the inspection engine as an <strong>Envoy sidecar proxy</strong> for Kubernetes microservice meshes.</li>
+<li>Integrating <strong>quantized Transformer models like MiniLM</strong> for deep semantic query parsing.</li>
+<li>Implementing <strong>continuous active learning</strong> where analyst feedback on REVIEW events automatically fine-tunes decision thresholds.&quot;*</li>
+</ol>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> The system is lightweight, cost-effective, and has a clear research expansion roadmap.</li>
+</ul>
+<hr />
+<h3><strong>Slide 20: Conclusion &amp; Committee Viva Q&amp;A</strong></h3>
+<ul>
+<li><strong>Assigned Speaker:</strong> Speaker 5 (Piyush Gauswami)</li>
+<li><strong>Timing:</strong> ~60 seconds | <strong>Word Count:</strong> 130 words</li>
+<li><strong>Visuals on Screen:</strong> Summary of contributions cards + Committee Q&amp;A Invitation Banner.</li>
+</ul>
+<blockquote>
+<p><em>&quot;In conclusion, our capstone project demonstrates that an AI-driven, multi-tier Web Application Firewall can successfully bridge the gap between deterministic speed and deep learning resilience.</em></p>
+<p><em>By resolving the CSIC 2010 synthetic duplicate leakage, engineering a hybrid cascade of regex, XGBoost, and PyTorch 1D-CNN, and deploying a zero-bypass Nginx gateway with live Streamlit observability, we have delivered a mathematically validated, production-grade cybersecurity solution.</em></p>
+<p><em>Our full codebase, trained models, test suites, and documentation are publicly available on GitHub, and our live dashboard is accessible online.</em></p>
+<p><em>On behalf of our team—<strong>Anant Soni, Pabitra Giri, Anurag Pandey, Saksham Pachauri, and Piyush Gauswami</strong>—we thank you for your time, and we welcome questions from the evaluation committee.&quot;</em></p>
+</blockquote>
+<ul>
+<li><strong>Anchor Takeaway for Examiners:</strong> Confident, formal close inviting technical questions.</li>
+</ul>
+<hr />
+<div class="page-break"></div>
+
+<h1>🎯 Top 10 Rapid-Fire Viva Defense Cheat Sheet</h1>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">Question</th>
+  <th style="text-align:left">Winning Examiner Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>Q1: What is your final accuracy?</strong></td>
+  <td style="text-align:left"><strong>95.13% test accuracy</strong> on the frozen, leak-free test partition ($N = 3,842$) derived from deduplicated CSIC 2010 data.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q2: What is your inspection latency?</strong></td>
+  <td style="text-align:left"><strong>5.56 ms average inline latency</strong>, well below the enterprise SLA ceiling of 15.0 ms.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q3: What is your false-positive rate?</strong></td>
+  <td style="text-align:left"><strong>0.41%</strong> (only 6 false alarms out of 1,447 clean production requests).</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q4: How do you catch zero-days / obfuscation?</strong></td>
+  <td style="text-align:left">Our preprocessor recursively decodes up to depth 3, and the PyTorch 1D-CNN captures character n-grams across kernels 3, 5, and 7, maintaining &gt;91% accuracy against 7 mutation vectors.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q5: Why not use a Transformer (BERT/GPT)?</strong></td>
+  <td style="text-align:left">Transformers require 30–100 ms per inference and multiple gigabytes of VRAM. Our 1D-CNN runs in 0.596 ms with a 0.23 MB weight footprint.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q6: How do you prove zero data leakage?</strong></td>
+  <td style="text-align:left">We purged 35,457 duplicates (58.06% of raw CSIC 2010) and verified that the intersection between Train, Validation, and Test sets is strictly 0.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q7: What is the purpose of the REVIEW state?</strong></td>
+  <td style="text-align:left">Boundary requests ($0.35 \le P &lt; 0.65$) like names with apostrophes are allowed through with a warning header, eliminating 91% of false blocks without risking security.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q8: How does Nginx guarantee zero-bypass?</strong></td>
+  <td style="text-align:left">The protected app container has no exposed host ports on <code>waf_internal</code>. Nginx uses <code>auth_request</code> to verify requests before proxying; blocked attacks never arrive.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q9: How do you explain blocks to SOC analysts?</strong></td>
+  <td style="text-align:left">We integrate TreeSHAP to calculate exact game-theoretic Shapley contributions for special character counts, entropy, and keywords.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q10: Where is the live deployment?</strong></td>
+  <td style="text-align:left">Deployed live on Streamlit Cloud at <code>https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/</code>.</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
