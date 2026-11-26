@@ -1,0 +1,155 @@
+{
+  "Traditional_Rule_WAF": {
+    "accuracy": 0.5133,
+    "precision": 1.0,
+    "recall": 0.2192,
+    "f1_score": 0.3596,
+    "roc_auc": 0.6096,
+    "pr_auc": 0.7059,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.7808,
+    "latency_ms": 0.108,
+    "confusion_matrix": {
+      "true_negatives": 1447,
+      "false_positives": 0,
+      "false_negatives": 1870,
+      "true_positives": 525
+    }
+  },
+  "Logistic_Regression": {
+    "accuracy": 0.8251,
+    "precision": 0.8817,
+    "recall": 0.8309,
+    "f1_score": 0.8555,
+    "roc_auc": 0.9073,
+    "pr_auc": 0.9461,
+    "false_positive_rate": 0.1845,
+    "false_negative_rate": 0.1691,
+    "latency_ms": 0.53,
+    "confusion_matrix": {
+      "true_negatives": 1180,
+      "false_positives": 267,
+      "false_negatives": 405,
+      "true_positives": 1990
+    }
+  },
+  "Random_Forest": {
+    "accuracy": 0.8896,
+    "precision": 0.9612,
+    "recall": 0.8576,
+    "f1_score": 0.9064,
+    "roc_auc": 0.9598,
+    "pr_auc": 0.9779,
+    "false_positive_rate": 0.0574,
+    "false_negative_rate": 0.1424,
+    "latency_ms": 37.74,
+    "confusion_matrix": {
+      "true_negatives": 1364,
+      "false_positives": 83,
+      "false_negatives": 341,
+      "true_positives": 2054
+    }
+  },
+  "Linear_Svm": {
+    "accuracy": 0.7819,
+    "precision": 0.8192,
+    "recall": 0.8342,
+    "f1_score": 0.8266,
+    "roc_auc": 0.8718,
+    "pr_auc": 0.926,
+    "false_positive_rate": 0.3048,
+    "false_negative_rate": 0.1658,
+    "latency_ms": 0.41,
+    "confusion_matrix": {
+      "true_negatives": 1006,
+      "false_positives": 441,
+      "false_negatives": 397,
+      "true_positives": 1998
+    }
+  },
+  "Xgboost": {
+    "accuracy": 0.9094,
+    "precision": 0.9642,
+    "recall": 0.8877,
+    "f1_score": 0.9243,
+    "roc_auc": 0.974,
+    "pr_auc": 0.9856,
+    "false_positive_rate": 0.0546,
+    "false_negative_rate": 0.1123,
+    "latency_ms": 0.851,
+    "confusion_matrix": {
+      "true_negatives": 1368,
+      "false_positives": 79,
+      "false_negatives": 269,
+      "true_positives": 2126
+    }
+  },
+  "PyTorch_MLP": {
+    "accuracy": 0.8186,
+    "precision": 0.8564,
+    "recall": 0.8518,
+    "f1_score": 0.8541,
+    "roc_auc": 0.9203,
+    "pr_auc": 0.9541,
+    "false_positive_rate": 0.2364,
+    "false_negative_rate": 0.1482,
+    "latency_ms": 0.146,
+    "confusion_matrix": {
+      "true_negatives": 1105,
+      "false_positives": 342,
+      "false_negatives": 355,
+      "true_positives": 2040
+    }
+  },
+  "PyTorch_1D_CNN": {
+    "accuracy": 0.9435,
+    "precision": 0.9986,
+    "recall": 0.9106,
+    "f1_score": 0.9526,
+    "roc_auc": 0.987,
+    "pr_auc": 0.9938,
+    "false_positive_rate": 0.0021,
+    "false_negative_rate": 0.0894,
+    "latency_ms": 0.866,
+    "confusion_matrix": {
+      "true_negatives": 1444,
+      "false_positives": 3,
+      "false_negatives": 214,
+      "true_positives": 2181
+    }
+  },
+  "PyTorch_BiLSTM": {
+    "accuracy": 0.6869,
+    "precision": 0.7998,
+    "recall": 0.6639,
+    "f1_score": 0.7255,
+    "roc_auc": 0.7766,
+    "pr_auc": 0.8827,
+    "false_positive_rate": 0.2751,
+    "false_negative_rate": 0.3361,
+    "latency_ms": 3.384,
+    "confusion_matrix": {
+      "true_negatives": 1049,
+      "false_positives": 398,
+      "false_negatives": 805,
+      "true_positives": 1590
+    }
+  },
+  "PyTorch_Autoencoder": {
+    "accuracy": 0.6936,
+    "precision": 0.9849,
+    "recall": 0.5165,
+    "f1_score": 0.6776,
+    "roc_auc": 0.8453,
+    "pr_auc": 0.9128,
+    "false_positive_rate": 0.0131,
+    "false_negative_rate": 0.4835,
+    "latency_ms": 0.198,
+    "confusion_matrix": {
+      "true_negatives": 1428,
+      "false_positives": 19,
+      "false_negatives": 1158,
+      "true_positives": 1237
+    }
+  }
+}

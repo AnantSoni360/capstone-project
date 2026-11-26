@@ -1,0 +1,851 @@
+# MASTER PROJECT BRIEF – AI-BASED WEB APPLICATION FIREWALL
+
+## 1. Project Overview
+
+I am developing a B.Tech final-year capstone project in Artificial Intelligence and Machine Learning.
+
+**Project Title:** AI-Based Web Application Firewall for SQL Injection and XSS Detection.
+
+**Primary Dataset:** CSIC 2010 HTTP Dataset.
+
+**Domain:** Artificial Intelligence, Machine Learning, Deep Learning and Cybersecurity.
+
+The objective is to develop an intelligent Web Application Firewall (WAF) that can inspect incoming HTTP requests, identify malicious requests, particularly SQL Injection (SQLi) and Cross-Site Scripting (XSS), and prevent malicious requests from reaching a protected web application.
+
+This is not just a machine learning classification notebook or a dashboard. It must ultimately become a functional, experimentally evaluated and deployable AI-powered Web Application Firewall.
+
+---
+
+## 2. Problem Statement
+
+Modern web applications receive HTTP requests from thousands of users. Attackers can manipulate these requests to exploit application vulnerabilities.
+
+Two major attacks that our project focuses on are:
+
+### A. SQL Injection (SQLi)
+
+Attackers insert malicious SQL commands into input fields or HTTP parameters to manipulate database queries.
+
+Example:
+
+Normal request:
+`/search?q=laptop`
+
+Malicious request:
+`/search?q=' OR 1=1 --`
+
+Potential consequences:
+- Unauthorized database access.
+- Authentication bypass.
+- Data leakage.
+- Database manipulation.
+
+### B. Cross-Site Scripting (XSS)
+
+Attackers inject malicious JavaScript or HTML into web application inputs, which may execute in other users' browsers.
+
+Example:
+
+`<script>alert('XSS')</script>`
+
+Potential consequences:
+- Session compromise.
+- Unauthorized browser actions.
+- Phishing.
+- Website content manipulation.
+
+### Limitations of Traditional WAFs
+
+Traditional Web Application Firewalls mainly depend on predefined signatures and rules.
+
+For example:
+- Detecting UNION SELECT.
+- Detecting script tags.
+- Detecting suspicious SQL keywords.
+- Detecting malicious HTML patterns.
+
+These rules are useful but may fail against modified, encoded or obfuscated attack patterns. Poorly configured rules can also block legitimate requests.
+
+### Our Proposed Solution
+
+Develop an AI-powered WAF that learns patterns from HTTP traffic using Machine Learning and Deep Learning.
+
+The system will compare:
+1. Traditional rule-based detection.
+2. Machine Learning detection.
+3. Deep Learning detection.
+
+It will also incorporate Explainable AI to understand why a request is classified as malicious.
+
+The best experimentally validated model will be integrated into a working WAF application.
+
+---
+
+## 3. Main Objectives
+
+1. Understand traditional web application security and WAF mechanisms.
+2. Study signature-based, rule-based and anomaly-based detection.
+3. Use the CSIC 2010 HTTP Dataset for research and model development.
+4. Develop an HTTP request parser.
+5. Perform data cleaning and exploratory data analysis.
+6. Extract meaningful features from HTTP requests.
+7. Apply feature-selection techniques.
+8. Implement a traditional rule-based WAF.
+9. Train and compare multiple Machine Learning models.
+10. Implement and compare Deep Learning architectures.
+11. Perform hyperparameter tuning.
+12. Implement SHAP and LIME for Explainable AI.
+13. Evaluate detection performance using cybersecurity metrics.
+14. Perform robustness testing against modified and obfuscated attacks.
+15. Deploy the best validated model using FastAPI.
+16. Integrate actual request blocking using a reverse proxy.
+17. Develop a Streamlit monitoring dashboard.
+18. Package the application using Docker.
+
+---
+
+## 4. Dataset
+
+Use the CSIC 2010 HTTP Dataset.
+
+It contains HTTP traffic generated for research into web application security, including normal and anomalous requests to a simulated e-commerce application.
+
+The dataset contains information such as:
+- HTTP methods.
+- URLs.
+- Parameters.
+- Headers.
+- Request bodies.
+- Normal and anomalous traffic labels.
+
+### Dataset Processing Requirements
+
+First inspect the actual dataset files and their structure.
+
+Do not assume that all anomalous requests are SQL Injection or XSS. Investigate the available labels and payloads to identify supported attack categories.
+
+Develop a parser that converts raw HTTP traffic into structured records.
+
+Example:
+
+{
+  "method": "GET",
+  "url": "/search?q=laptop",
+  "parameters": "q=laptop",
+  "headers": {},
+  "body": "",
+  "label": 0
+}
+
+Use:
+- 0 = Normal
+- 1 = Attack
+
+Preserve additional attack-category labels wherever the source supports them.
+
+### Important Dataset Considerations
+
+- Remove duplicate requests before creating the final evaluation splits.
+- Prevent data leakage.
+- Inspect dataset-specific shortcut features.
+- Do not use attributes that reveal labels artificially.
+- Use stratified train/validation/test splitting for supervised classification.
+- Fit preprocessing and feature selection using training data only.
+- Document how the original dataset partitions are used.
+- Train the autoencoder using normal traffic only.
+- Select its anomaly threshold using validation data.
+
+Suggested supervised split:
+- 70% training.
+- 15% validation.
+- 15% testing.
+
+This is a starting configuration and should be adjusted if the dataset structure or grouping requires it.
+
+---
+
+## 5. Project Architecture
+
+The overall system should follow this architecture:
+
+Incoming HTTP Requests
+        |
+        v
+HTTP Request Parser
+        |
+        v
+Data Preprocessing
+        |
+        v
+Feature Extraction
+        |
+        +--------------------------+
+        |                          |
+        v                          v
+ Traditional Rule Engine      AI Detection Engine
+        |                          |
+        |                  +-------+-------+
+        |                  |               |
+        |                  v               v
+        |                 ML Models      DL Models
+        |                  |               |
+        +------------------+---------------+
+                           |
+                           v
+                    Decision Engine
+                           |
+                    +------+------+
+                    |             |
+                    v             v
+                   ALLOW         BLOCK
+                    |             |
+                    v             v
+             Protected App    Block Response
+                           |
+                           v
+                    Security Logging
+                           |
+                           v
+                  Streamlit Dashboard
+
+SHAP and LIME will explain individual AI model predictions.
+
+The system must preserve separate model predictions for experimental comparison. Do not blindly combine every model into an ensemble without first evaluating the individual models.
+
+---
+
+## 6. Implementation Modules
+
+### MODULE 1: Literature Review and Traditional WAF
+
+Study:
+- Signature-based detection.
+- Rule-based detection.
+- Anomaly-based detection.
+- Traditional WAF mechanisms.
+- ModSecurity and OWASP CRS concepts.
+
+Document strengths, limitations and differences between traditional and AI-driven detection.
+
+### MODULE 2: Dataset Processing
+
+Create:
+- HTTP parser.
+- Dataset loader.
+- Label processor.
+- Duplicate detector.
+- Structured CSV generator.
+
+Save processed data in the data/processed directory.
+
+### MODULE 3: Preprocessing and EDA
+
+Use:
+- Pandas.
+- NumPy.
+- Matplotlib.
+- Seaborn.
+
+Perform:
+- Missing-value analysis.
+- Duplicate analysis.
+- Class distribution analysis.
+- Request-length analysis.
+- HTTP method distribution.
+- Special-character frequency.
+- SQL and XSS pattern analysis.
+- Correlation analysis.
+- Dataset shortcut and leakage investigation.
+
+Generate and save meaningful graphs.
+
+### MODULE 4: Feature Engineering
+
+Extract the following features:
+
+Length features:
+- URL length.
+- Request body length.
+- Total request length.
+- Parameter count.
+- Average parameter length.
+
+Character features:
+- Single quote count.
+- Double quote count.
+- Angle bracket count.
+- Semicolon count.
+- Percentage symbol count.
+- Hyphen count.
+- Special-character ratio.
+
+SQL-related features:
+- SELECT.
+- UNION.
+- INSERT.
+- UPDATE.
+- DELETE.
+- DROP.
+- SQL comment patterns.
+
+XSS-related features:
+- Script tag patterns.
+- HTML tag patterns.
+- JavaScript event-handler patterns.
+- JavaScript protocol patterns.
+
+Text features:
+- TF-IDF.
+- Character n-grams.
+- Character-level sequences.
+
+Also investigate entropy and digit ratios where useful.
+
+### MODULE 5: Feature Selection
+
+Implement at least two techniques, preferably all three:
+
+1. Chi-Square.
+2. Random Forest Feature Importance.
+3. Recursive Feature Elimination (RFE).
+
+Compare model performance with:
+- All features.
+- Selected features.
+
+Save feature-selection outputs and plots.
+
+### MODULE 6: Traditional Rule-Based WAF
+
+Develop approximately 15–20 documented security rules.
+
+Prioritize:
+- SQL Injection.
+- XSS.
+
+Supplementary rules may include:
+- Path Traversal.
+- Command Injection.
+- CRLF Injection.
+
+Implement:
+- Request normalization.
+- Rule matching.
+- Rule identifiers.
+- Risk scoring.
+- Threshold-based decisions.
+- Matched-rule explanations.
+
+This module will be the traditional baseline for experimental comparison.
+
+### MODULE 7: Machine Learning
+
+Implement these algorithms:
+
+1. Logistic Regression.
+2. Random Forest.
+3. Support Vector Machine (SVM).
+4. XGBoost.
+
+Requirements:
+- Train models.
+- Validate models.
+- Perform hyperparameter tuning using Grid Search or Random Search.
+- Evaluate on the same held-out test set.
+- Save trained models.
+- Save evaluation metrics.
+- Generate comparison graphs.
+
+### MODULE 8: Deep Learning
+
+Implement these architectures:
+
+1. Multi-Layer Perceptron (MLP).
+   - Input: Handcrafted numerical features.
+
+2. 1D Convolutional Neural Network (CNN).
+   - Input: Character-level sequences.
+   - Purpose: Learn local malicious text patterns.
+
+3. LSTM or BiLSTM.
+   - Input: Character-level sequences.
+   - Purpose: Learn sequential patterns in HTTP requests.
+
+4. Optional Autoencoder.
+   - Train using normal traffic.
+   - Calculate reconstruction error.
+   - Detect unusual requests using a calibrated threshold.
+
+Use TensorFlow/Keras or an equivalent suitable framework.
+
+Include:
+- Model architecture.
+- Training and validation loss.
+- Training and validation accuracy.
+- Hyperparameter configuration.
+- Saved model weights.
+- Evaluation metrics.
+
+### MODULE 9: Explainable AI
+
+Implement:
+
+A. SHAP
+- Feature importance.
+- Summary plots.
+- Individual prediction explanations.
+
+B. LIME
+- Individual request explanations.
+- Highlight important characters or text segments.
+- Explain why a request was classified as malicious.
+
+Save the explanation outputs.
+
+Use SHAP with an appropriate tree model and LIME with an appropriate text or prediction pipeline.
+
+### MODULE 10: Model Evaluation
+
+Evaluate all detection methods using:
+
+- Accuracy.
+- Precision.
+- Recall.
+- F1-score.
+- Confusion matrix.
+- False Positive Rate.
+- False Negative Rate.
+- ROC-AUC.
+- Detection latency.
+
+Explain the cybersecurity importance of false positives and false negatives.
+
+Where labels permit, report SQLi and XSS detection performance separately.
+
+Compare:
+- Rule-based WAF.
+- Logistic Regression.
+- Random Forest.
+- SVM.
+- XGBoost.
+- MLP.
+- CNN.
+- LSTM.
+
+Never invent or hardcode experimental results.
+
+### MODULE 11: Robustness Testing
+
+Create controlled variations of malicious test requests.
+
+Test:
+- URL encoding.
+- Case changes.
+- Whitespace changes.
+- Selected comment insertion.
+- Equivalent payload variations.
+
+Compare the detection performance of rule-based, ML and DL systems.
+
+Report changes in recall, false-positive rate and detection performance.
+
+An optional cross-dataset evaluation can be conducted using a compatible public dataset after checking its license and label compatibility.
+
+### MODULE 12: FastAPI Backend
+
+Integrate the best validated model into a FastAPI backend.
+
+Required endpoints:
+
+POST /scan
+POST /predict
+GET /rules
+GET /analytics
+GET /health
+
+The /scan endpoint should:
+1. Receive an HTTP request representation.
+2. Validate the input.
+3. Parse the request.
+4. Extract features.
+5. Run the selected detector.
+6. Calculate a risk score.
+7. Generate an explanation.
+8. Return ALLOW or BLOCK.
+
+Example response:
+
+{
+  "verdict": "BLOCK",
+  "attack_type": "SQL_INJECTION",
+  "risk_score": 0.98,
+  "matched_rules": ["SQLI_1"],
+  "reason": "Suspicious SQL injection pattern detected"
+}
+
+The values above are illustrative only.
+
+### MODULE 13: Actual WAF Integration
+
+A prediction API alone is not sufficient to demonstrate a working WAF.
+
+Integrate the detection service with a reverse proxy such as Nginx.
+
+Architecture:
+
+Browser / Client
+      |
+      v
+Reverse Proxy / WAF
+      |
+      v
+AI Detection Service
+      |
+      +---- BLOCK: Return security response
+      |
+      +---- ALLOW: Forward request
+                    |
+                    v
+             Protected Web App
+
+Use a deliberately vulnerable application such as DVWA for controlled testing.
+
+Only test against applications running in an authorized environment.
+
+### MODULE 14: Streamlit Dashboard
+
+Develop a professional cybersecurity monitoring dashboard.
+
+Suggested pages:
+
+1. Overview Dashboard.
+2. Live HTTP Traffic.
+3. Manual Request Scanner.
+4. Attack Detection Results.
+5. SQL Injection Analysis.
+6. XSS Analysis.
+7. ML/DL Model Comparison.
+8. SHAP and LIME Explanations.
+9. Rule Engine.
+10. Security Logs and Reports.
+
+Display:
+- Total requests.
+- Allowed requests.
+- Blocked requests.
+- Attack distribution.
+- Risk scores.
+- Detection trends.
+- Model metrics.
+- False positives and false negatives.
+
+Use a clean, modern, professional interface with a white-and-orange theme, appropriate cybersecurity visualizations and responsive layouts.
+
+### MODULE 15: Database and Logging
+
+Use SQLite initially or PostgreSQL if required.
+
+Store:
+- Request ID.
+- Timestamp.
+- HTTP method.
+- Safe request metadata.
+- Detection result.
+- Attack category.
+- Risk score.
+- Matched rules.
+- Model identifier.
+- Final decision.
+
+Never persist passwords, authentication tokens, session cookies or other sensitive request contents.
+
+### MODULE 16: Docker Deployment
+
+Create:
+- Dockerfile.
+- docker-compose.yml.
+- Backend container.
+- Dashboard container.
+- Reverse proxy configuration.
+- Protected test application configuration.
+
+Ensure the complete application can be started consistently.
+
+---
+
+## 7. Recommended Technology Stack
+
+Programming: Python 3.12
+
+Data Processing:
+- Pandas.
+- NumPy.
+
+Visualization:
+- Matplotlib.
+- Seaborn.
+
+Machine Learning:
+- Scikit-learn.
+- XGBoost.
+
+Deep Learning:
+- TensorFlow/Keras.
+
+Text Processing:
+- TF-IDF.
+- Character n-grams.
+- Sequence tokenization.
+
+Explainable AI:
+- SHAP.
+- LIME.
+
+Backend:
+- FastAPI.
+- Uvicorn.
+
+Dashboard:
+- Streamlit.
+
+Database:
+- SQLite or PostgreSQL.
+
+Reverse Proxy:
+- Nginx.
+
+Deployment:
+- Docker.
+- Docker Compose.
+
+Testing:
+- Pytest.
+- Requests.
+
+---
+
+## 8. Suggested Project Directory
+
+AI-WAF-Capstone/
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── external/
+│
+├── notebooks/
+│   ├── 01_dataset_analysis.ipynb
+│   ├── 02_preprocessing.ipynb
+│   ├── 03_feature_engineering.ipynb
+│   ├── 04_feature_selection.ipynb
+│   ├── 05_rule_based_waf.ipynb
+│   ├── 06_machine_learning.ipynb
+│   ├── 07_deep_learning.ipynb
+│   ├── 08_explainable_ai.ipynb
+│   └── 09_robustness_testing.ipynb
+│
+├── src/
+│   ├── parser.py
+│   ├── preprocessing.py
+│   ├── features.py
+│   ├── rules.py
+│   ├── evaluation.py
+│   └── inference.py
+│
+├── models/
+│
+├── backend/
+│   └── main.py
+│
+├── dashboard/
+│   └── app.py
+│
+├── proxy/
+│   └── nginx.conf
+│
+├── tests/
+│
+├── reports/
+│
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
+
+You may improve this structure if there is a technical reason, but keep research, backend, frontend, models and deployment code organized separately.
+
+---
+
+## 9. Academic Requirements
+
+This is an official university capstone project.
+
+The implementation must support:
+- Literature review.
+- Dataset justification.
+- Preprocessing and EDA.
+- Feature engineering.
+- At least two feature-selection methods.
+- At least three ML algorithms.
+- At least three DL architectures.
+- Hyperparameter tuning.
+- At least two XAI techniques.
+- Comparative evaluation.
+- Robustness analysis.
+- Real-time demonstration.
+- Final academic report.
+
+Maintain research reproducibility.
+
+For every experiment, save:
+- Configuration.
+- Random seed.
+- Dataset split information.
+- Model parameters.
+- Evaluation metrics.
+- Graphs.
+- Actual outputs.
+
+Do not fabricate results or claim an experiment has been completed unless it has actually been executed.
+
+---
+
+## 10. Development Instructions for Antigravity
+
+Follow these instructions carefully.
+
+### First: Understand, inspect and plan
+
+Before writing code:
+
+1. Inspect the existing workspace.
+2. Identify whether a project already exists.
+3. Inspect available datasets and files.
+4. Check the Python environment.
+5. Identify available system resources.
+6. Prepare an implementation plan.
+7. Identify dependencies and potential compatibility issues.
+
+Do not overwrite or delete existing user files without permission.
+
+### Second: Build phase by phase
+
+Do not generate the entire application in one step.
+
+Follow this sequence:
+
+Phase 1: Dataset acquisition and inspection.
+
+Phase 2: HTTP parser and structured dataset.
+
+Phase 3: Preprocessing and EDA.
+
+Phase 4: Feature engineering and selection.
+
+Phase 5: Rule-based WAF.
+
+Phase 6: Machine Learning models.
+
+Phase 7: Deep Learning models.
+
+Phase 8: SHAP and LIME.
+
+Phase 9: Evaluation and robustness testing.
+
+Phase 10: FastAPI backend.
+
+Phase 11: Actual reverse-proxy-based blocking.
+
+Phase 12: Streamlit dashboard.
+
+Phase 13: Docker deployment.
+
+Phase 14: Testing and documentation.
+
+### Third: Verify every phase
+
+After completing each phase:
+
+- Execute the code.
+- Check for errors.
+- Verify the outputs.
+- Save generated artifacts.
+- Document the implementation.
+- Explain what has been completed.
+- Explain what remains.
+
+Never move forward while critical errors remain unresolved.
+
+### Fourth: Optimize for my laptop
+
+My development environment:
+
+- Intel Core i5-12450H.
+- 16 GB RAM.
+- NVIDIA GTX 1650 with 4 GB VRAM.
+- Windows 11.
+- Python 3.12.
+- Docker Desktop available.
+
+Avoid unnecessarily large models and memory-intensive configurations.
+
+Use CPU-compatible implementations where appropriate.
+
+Do not assume GPU training will work without verifying TensorFlow/PyTorch compatibility.
+
+### Fifth: Keep the project academically honest
+
+Never:
+- Fabricate accuracy or performance values.
+- Hardcode model predictions.
+- Display fake real-time traffic.
+- Generate artificial results and present them as dataset findings.
+- Claim actual blocking when only a prediction API exists.
+- Claim production readiness without appropriate testing.
+
+Use clearly labelled demonstration traffic only when actual traffic is not available.
+
+---
+
+## 11. Expected Final Outcome
+
+At completion, I should have:
+
+1. A properly structured capstone codebase.
+2. A processed CSIC 2010 dataset.
+3. A working HTTP request parser.
+4. EDA and feature-engineering notebooks.
+5. A documented traditional rule-based WAF.
+6. At least four trained ML models.
+7. At least three trained DL models.
+8. SHAP and LIME explanations.
+9. Complete comparative evaluation.
+10. Robustness testing results.
+11. A working FastAPI backend.
+12. Actual ALLOW/BLOCK enforcement through a reverse proxy.
+13. A professional Streamlit dashboard.
+14. Docker deployment.
+15. Testing documentation.
+16. A comprehensive academic project report.
+17. A README explaining setup, execution and demonstration.
+
+## 12. Start Here – Your First Task
+
+Do not start coding the complete project immediately.
+
+First, understand the entire project brief and inspect my existing workspace.
+
+Then provide me with:
+
+1. Your understanding of the problem.
+2. The proposed technical architecture.
+3. The complete implementation roadmap.
+4. Required libraries and dependencies.
+5. Dataset download and preparation requirements.
+6. Potential technical challenges.
+7. A phase-wise development plan.
+8. The expected outputs of every phase.
+
+Wait for my approval before beginning implementation.
+
+Treat this as a serious B.Tech AI & ML capstone project. Prioritize correctness, research quality, working functionality, reproducibility and a successful college demonstration over unnecessary UI complexity.

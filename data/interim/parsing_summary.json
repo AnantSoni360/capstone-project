@@ -1,0 +1,19 @@
+{
+  "raw_record_count": 61065,
+  "deduplicated_record_count": 25608,
+  "duplicate_count_removed": 35457,
+  "deduplication_ratio": 58.06,
+  "ground_truth_distribution": {
+    "0_normal": 9644,
+    "1_anomalous": 15964
+  },
+  "diagnostic_category_distribution": {
+    "GENERIC_ANOMALY": 12321,
+    "BENIGN": 9644,
+    "SQL_INJECTION": 1893,
+    "XSS": 984,
+    "CRLF_INJECTION": 764,
+    "PATH_TRAVERSAL": 2
+  },
+  "processing_time_seconds": 18.06
+}

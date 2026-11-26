@@ -1,0 +1,106 @@
+{
+  "execution_time_seconds": 54.44,
+  "feature_dimensions": {
+    "handcrafted_numerical_features": 79,
+    "tfidf_char_ngram_features": 500,
+    "total_combined_features": 579
+  },
+  "matrix_shapes": {
+    "X_train_combined": [
+      17925,
+      579
+    ],
+    "X_val_combined": [
+      3841,
+      579
+    ],
+    "X_test_combined": [
+      3842,
+      579
+    ]
+  },
+  "top_10_features_by_rf_importance": [
+    {
+      "feature": "ratio_uppers",
+      "rf_importance": 0.12017910938939953
+    },
+    {
+      "feature": "shannon_entropy",
+      "rf_importance": 0.08047810764184132
+    },
+    {
+      "feature": "ratio_alphas",
+      "rf_importance": 0.07302783855423586
+    },
+    {
+      "feature": "ratio_specials",
+      "rf_importance": 0.06792814258802254
+    },
+    {
+      "feature": "ratio_digits",
+      "rf_importance": 0.0642710810023524
+    },
+    {
+      "feature": "ratio_slash",
+      "rf_importance": 0.059449306348949654
+    },
+    {
+      "feature": "avg_param_length",
+      "rf_importance": 0.05399518348608703
+    },
+    {
+      "feature": "ratio_space",
+      "rf_importance": 0.05094746197504736
+    },
+    {
+      "feature": "ratio_equal",
+      "rf_importance": 0.0497104757432072
+    },
+    {
+      "feature": "count_slash",
+      "rf_importance": 0.04492216487374691
+    }
+  ],
+  "top_10_features_by_f_score": [
+    {
+      "feature": "ratio_ampersand",
+      "f_score": 1545.7457357111102
+    },
+    {
+      "feature": "ratio_equal",
+      "f_score": 1394.7741991755759
+    },
+    {
+      "feature": "avg_param_length",
+      "f_score": 941.9594928531052
+    },
+    {
+      "feature": "count_slash",
+      "f_score": 690.6818599324679
+    },
+    {
+      "feature": "ratio_hyphen",
+      "f_score": 668.6386662131033
+    },
+    {
+      "feature": "ratio_specials",
+      "f_score": 649.5869452736633
+    },
+    {
+      "feature": "count_single_quote",
+      "f_score": 632.4066423100971
+    },
+    {
+      "feature": "count_hyphen",
+      "f_score": 621.5757161071293
+    },
+    {
+      "feature": "ratio_slash",
+      "f_score": 616.9130950135102
+    },
+    {
+      "feature": "sql_pat_sql_comment",
+      "f_score": 591.3200384771013
+    }
+  ]
+}

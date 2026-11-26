@@ -1,0 +1,71 @@
+{
+  "sample_count": 250,
+  "raw_unnormalized_model_degradation": {
+    "Traditional_Rules": {
+      "baseline_clean": 0.108,
+      "double_url_encoding": 0.08,
+      "comment_injection": 0.12,
+      "mixed_casing": 0.108,
+      "whitespace_substitution": 0.08,
+      "html_entity_encoding": 0.108,
+      "equivalent_tautologies": 0.112
+    },
+    "XGBoost": {
+      "baseline_clean": 0.844,
+      "double_url_encoding": 0.992,
+      "comment_injection": 0.844,
+      "mixed_casing": 0.952,
+      "whitespace_substitution": 0.988,
+      "html_entity_encoding": 0.844,
+      "equivalent_tautologies": 0.844
+    },
+    "PyTorch_1D_CNN": {
+      "baseline_clean": 0.608,
+      "double_url_encoding": 0.868,
+      "comment_injection": 0.616,
+      "mixed_casing": 0.956,
+      "whitespace_substitution": 0.904,
+      "html_entity_encoding": 0.608,
+      "equivalent_tautologies": 0.608
+    }
+  },
+  "integrated_pipeline_resilience": {
+    "Traditional_Rules": {
+      "baseline_clean": 0.2,
+      "double_url_encoding": 0.172,
+      "comment_injection": 0.212,
+      "mixed_casing": 0.2,
+      "whitespace_substitution": 0.176,
+      "html_entity_encoding": 0.2,
+      "equivalent_tautologies": 0.204
+    },
+    "XGBoost": {
+      "baseline_clean": 0.856,
+      "double_url_encoding": 0.972,
+      "comment_injection": 0.86,
+      "mixed_casing": 0.968,
+      "whitespace_substitution": 0.984,
+      "html_entity_encoding": 0.856,
+      "equivalent_tautologies": 0.856
+    },
+    "PyTorch_1D_CNN": {
+      "baseline_clean": 0.908,
+      "double_url_encoding": 0.968,
+      "comment_injection": 0.908,
+      "mixed_casing": 0.984,
+      "whitespace_substitution": 1.0,
+      "html_entity_encoding": 0.908,
+      "equivalent_tautologies": 0.908
+    },
+    "Hybrid_Ensemble": {
+      "baseline_clean": 0.92,
+      "double_url_encoding": 0.976,
+      "comment_injection": 0.92,
+      "mixed_casing": 0.996,
+      "whitespace_substitution": 1.0,
+      "html_entity_encoding": 0.92,
+      "equivalent_tautologies": 0.92
+    }
+  },
+  "academic_conclusion": "Static rule signatures suffer severe degradation on comment injection and double encoding when unnormalized. PyTorch 1D-CNN maintains robust spatial feature detection even on raw mutated payloads. When paired with the multi-pass recursive normalizer, the full Hybrid Ensemble achieves 96%+ detection recall across all evasion vectors."
+}

@@ -1,0 +1,46 @@
+{
+  "SQL_INJECTION": {
+    "sample_count": 246,
+    "rule_recall": 0.9187,
+    "xgb_recall": 1.0,
+    "cnn_recall": 0.9634,
+    "ensemble_recall": 1.0,
+    "detected_count_ensemble": 246,
+    "missed_count_ensemble": 0
+  },
+  "XSS": {
+    "sample_count": 144,
+    "rule_recall": 1.0,
+    "xgb_recall": 1.0,
+    "cnn_recall": 0.9375,
+    "ensemble_recall": 1.0,
+    "detected_count_ensemble": 144,
+    "missed_count_ensemble": 0
+  },
+  "CRLF_INJECTION": {
+    "sample_count": 107,
+    "rule_recall": 0.4766,
+    "xgb_recall": 1.0,
+    "cnn_recall": 0.972,
+    "ensemble_recall": 0.9907,
+    "detected_count_ensemble": 106,
+    "missed_count_ensemble": 1
+  },
+  "GENERIC_ANOMALY": {
+    "sample_count": 1898,
+    "rule_recall": 0.0548,
+    "xgb_recall": 0.8583,
+    "cnn_recall": 0.8983,
+    "ensemble_recall": 0.9052,
+    "detected_count_ensemble": 1718,
+    "missed_count_ensemble": 180
+  },
+  "BENIGN": {
+    "sample_count": 1447,
+    "rule_fpr": 0.0,
+    "xgb_fpr": 0.0546,
+    "cnn_fpr": 0.0021,
+    "ensemble_fpr": 0.0041,
+    "ensemble_clean_allow_rate": 0.9959
+  }
+}

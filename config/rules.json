@@ -1,0 +1,153 @@
+{
+  "ruleset_version": "1.0.0",
+  "default_thresholds": {
+    "block_threshold": 0.70,
+    "review_threshold": 0.35
+  },
+  "rules": [
+    {
+      "id": "SQLI_01_UNION_SELECT",
+      "category": "SQL_INJECTION",
+      "name": "SQL Injection - UNION SELECT Attack",
+      "description": "Detects classic UNION-based SQL injection targeting column and table enumeration.",
+      "pattern": "\\bunion\\b[\\s/\\*]+(?:all[\\s/\\*]+)?\\bselect\\b",
+      "weight": 0.95
+    },
+    {
+      "id": "SQLI_02_TAUTOLOGY",
+      "category": "SQL_INJECTION",
+      "name": "SQL Injection - Tautology Bypass",
+      "description": "Detects tautology boolean statements (e.g., OR 1=1, 'a'='a') used to bypass authentication.",
+      "pattern": "['\"]?\\s+(?:or|xor|and)\\s+['\"]?([\\w\\d]+)['\"]?\\s*=\\s*['\"]?\\1['\"]?",
+      "weight": 0.90
+    },
+    {
+      "id": "SQLI_03_COMMENTS",
+      "category": "SQL_INJECTION",
+      "name": "SQL Injection - Comment Syntax",
+      "description": "Detects SQL inline comments used to truncate queries or obfuscate keywords.",
+      "pattern": "(?:--|/\\*.*?\\*/|#\\s|;--)",
+      "weight": 0.70
+    },
+    {
+      "id": "SQLI_04_BLIND_DELAY",
+      "category": "SQL_INJECTION",
+      "name": "SQL Injection - Time-Based Blind Delay",
+      "description": "Detects database execution delay functions used in inferential blind SQLi.",
+      "pattern": "(?:\\bwaitfor\\s+delay\\b|\\bpg_sleep\\s*\\(|\\bsleep\\s*\\(|\\bbenchmark\\s*\\()",
+      "weight": 0.95
+    },
+    {
+      "id": "SQLI_05_STACKED_QUERIES",
+      "category": "SQL_INJECTION",
+      "name": "SQL Injection - Stacked Query Injection",
+      "description": "Detects semicolon-delimited administrative SQL statements (DROP, ALTER, INSERT, UPDATE).",
+      "pattern": ";\\s*(?:drop\\s+table|delete\\s+from|insert\\s+into|update\\s+\\w+\\s+set|exec\\s*\\()",
+      "weight": 0.95
+    },
+    {
+      "id": "SQLI_06_BOOLEAN_OPERATORS",
+      "category": "SQL_INJECTION",
+      "name": "SQL Injection - Malicious Boolean Logic",
+      "description": "Detects injected boolean operators chaining suspicious SQL conditions.",
+      "pattern": "['\"]\\s+(?:and|or)\\s+['\"\\d\\w]+\\s*(?:like|=|>|<)\\s*['\"\\d\\w]+",
+      "weight": 0.75
+    },
+    {
+      "id": "SQLI_07_SCHEMA_KEYWORDS",
+      "category": "SQL_INJECTION",
+      "name": "SQL Injection - System Schema Enumeration",
+      "description": "Detects access to system tables (information_schema, sys.databases, sysobjects).",
+      "pattern": "\\b(?:information_schema|sys\\.tables|sys\\.databases|sysobjects|syscolumns)\\b",
+      "weight": 0.85
+    },
+    {
+      "id": "XSS_01_SCRIPT_TAG",
+      "category": "XSS",
+      "name": "Cross-Site Scripting - Script Tag Injection",
+      "description": "Detects opening and closing script tags including obfuscated casing and whitespace.",
+      "pattern": "<\\s*script\\b[^>]*>",
+      "weight": 0.95
+    },
+    {
+      "id": "XSS_02_JAVASCRIPT_URI",
+      "category": "XSS",
+      "name": "Cross-Site Scripting - JavaScript Protocol URI",
+      "description": "Detects javascript: or vbscript: pseudoprotocol execution in href or src attributes.",
+      "pattern": "(?:javascript|vbscript|data)\\s*:",
+      "weight": 0.90
+    },
+    {
+      "id": "XSS_03_EVENT_HANDLERS",
+      "category": "XSS",
+      "name": "Cross-Site Scripting - Inline HTML Event Handlers",
+      "description": "Detects DOM event handlers (onerror, onload, onclick, onmouseover).",
+      "pattern": "\\b(?:onerror|onload|onclick|onmouseover|onfocus|onblur)\\s*=",
+      "weight": 0.85
+    },
+    {
+      "id": "XSS_04_ALERT_EXECUTION",
+      "category": "XSS",
+      "name": "Cross-Site Scripting - Dialog Execution Functions",
+      "description": "Detects JavaScript dialog invocation (alert, confirm, prompt).",
+      "pattern": "\\b(?:alert|confirm|prompt)\\s*\\(",
+      "weight": 0.80
+    },
+    {
+      "id": "XSS_05_DOM_COOKIE_THEFT",
+      "category": "XSS",
+      "name": "Cross-Site Scripting - Document Cookie Access",
+      "description": "Detects client-side attempts to read or exfiltrate session cookies.",
+      "pattern": "\\bdocument\\.cookie\\b",
+      "weight": 0.90
+    },
+    {
+      "id": "XSS_06_HTML_INJECTION_TAGS",
+      "category": "XSS",
+      "name": "Cross-Site Scripting - Malicious HTML Tags",
+      "description": "Detects dangerous HTML tags frequently used for XSS (iframe, svg, embed, object).",
+      "pattern": "<\\s*(?:iframe|svg|embed|object|base)\\b[^>]*>",
+      "weight": 0.85
+    },
+    {
+      "id": "TRAV_01_DIRECTORY_DOT_DOT",
+      "category": "PATH_TRAVERSAL",
+      "name": "Path Traversal - Directory Climbing Sequences",
+      "description": "Detects recursive directory climbing sequences (../ or ..\\).",
+      "pattern": "(?:\\.\\./|\\.\\.\\\\){2,}",
+      "weight": 0.85
+    },
+    {
+      "id": "TRAV_02_SENSITIVE_FILES",
+      "category": "PATH_TRAVERSAL",
+      "name": "Path Traversal - Sensitive System Files",
+      "description": "Detects direct access to critical operating system files (/etc/passwd, win.ini).",
+      "pattern": "(?:/etc/passwd|/etc/shadow|\\bwin\\.ini\\b|\\bboot\\.ini\\b)",
+      "weight": 0.95
+    },
+    {
+      "id": "TRAV_03_BACKUP_EXTENSIONS",
+      "category": "PATH_TRAVERSAL",
+      "name": "Forced Browsing - Backup & Editor Files",
+      "description": "Detects reconnaissance requests for backup files (.bak, .old, .swp, ~).",
+      "pattern": "\\.(?:bak|old|orig|swp|tmp)$|~\\s*$",
+      "weight": 0.70
+    },
+    {
+      "id": "CRLF_01_RESPONSE_SPLITTING",
+      "category": "CRLF_INJECTION",
+      "name": "CRLF Injection - HTTP Response Splitting",
+      "description": "Detects carriage return line feed injection with attempts to set cookies or headers.",
+      "pattern": "(?:%0d%0a|\\r\\n)\\s*(?:set-cookie|location|content-type)\\s*:",
+      "weight": 0.85
+    },
+    {
+      "id": "CMDI_01_SHELL_COMMAND",
+      "category": "COMMAND_INJECTION",
+      "name": "Command Injection - Shell Metacharacter Execution",
+      "description": "Detects piped or sequenced shell command executions.",
+      "pattern": "(?:;|\\|\\||&&)\\s*(?:/bin/|cmd\\.exe|powershell|cat\\s+/|id\\s*$|whoami)",
+      "weight": 0.90
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "evaluation_sample_count": 3841,
+  "total_evaluation_time_seconds": 0.7,
+  "strict_block_policy": {
+    "accuracy": 0.5329,
+    "precision": 1.0,
+    "recall": 0.2509,
+    "f1_score": 0.4012,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.7491,
+    "confusion_matrix": {
+      "true_negatives": 1446,
+      "false_positives": 0,
+      "false_negatives": 1794,
+      "true_positives": 601
+    },
+    "latency_ms": {
+      "mean": 0.103,
+      "p95": 0.227
+    }
+  },
+  "combined_flag_policy": {
+    "accuracy": 0.5329,
+    "precision": 1.0,
+    "recall": 0.2509,
+    "f1_score": 0.4012,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.7491,
+    "confusion_matrix": {
+      "true_negatives": 1446,
+      "false_positives": 0,
+      "false_negatives": 1794,
+      "true_positives": 601
+    },
+    "latency_ms": {
+      "mean": 0.103,
+      "p95": 0.227
+    }
+  },
+  "verdict_distribution": {
+    "ALLOW": 3240,
+    "BLOCK": 601
+  },
+  "key_limitations_documented": [
+    "High false negative rate against parameter tampering and novel obfuscation",
+    "Deterministic signatures cannot adapt to zero-day syntax without manual updates",
+    "Provides an interpretable, ultra-low latency (<1ms) first-line security filter"
+  ]
+}

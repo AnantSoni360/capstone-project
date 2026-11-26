@@ -1,0 +1,104 @@
+{
+  "Rule_Engine_Only": {
+    "accuracy": 0.5133,
+    "precision": 1.0,
+    "recall": 0.2192,
+    "f1_score": 0.3596,
+    "roc_auc": 0.6096,
+    "pr_auc": 0.7059,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.7808,
+    "latency_ms": 0.051,
+    "confusion_matrix": {
+      "true_negatives": 1447,
+      "false_positives": 0,
+      "false_negatives": 1870,
+      "true_positives": 525
+    }
+  },
+  "XGBoost_Only": {
+    "accuracy": 0.9094,
+    "precision": 0.9642,
+    "recall": 0.8877,
+    "f1_score": 0.9243,
+    "roc_auc": 0.974,
+    "pr_auc": 0.9856,
+    "false_positive_rate": 0.0546,
+    "false_negative_rate": 0.1123,
+    "latency_ms": 0.963,
+    "confusion_matrix": {
+      "true_negatives": 1368,
+      "false_positives": 79,
+      "false_negatives": 269,
+      "true_positives": 2126
+    }
+  },
+  "PyTorch_1D_CNN_Only": {
+    "accuracy": 0.9435,
+    "precision": 0.9986,
+    "recall": 0.9106,
+    "f1_score": 0.9526,
+    "roc_auc": 0.987,
+    "pr_auc": 0.9938,
+    "false_positive_rate": 0.0021,
+    "false_negative_rate": 0.0894,
+    "latency_ms": 0.596,
+    "confusion_matrix": {
+      "true_negatives": 1444,
+      "false_positives": 3,
+      "false_negatives": 214,
+      "true_positives": 2181
+    }
+  },
+  "Rules_Plus_XGBoost": {
+    "accuracy": 0.8584,
+    "precision": 0.9941,
+    "recall": 0.7775,
+    "f1_score": 0.8725,
+    "roc_auc": 0.9742,
+    "pr_auc": 0.9857,
+    "false_positive_rate": 0.0076,
+    "false_negative_rate": 0.2225,
+    "latency_ms": 1.049,
+    "confusion_matrix": {
+      "true_negatives": 1436,
+      "false_positives": 11,
+      "false_negatives": 533,
+      "true_positives": 1862
+    }
+  },
+  "XGBoost_Plus_CNN": {
+    "accuracy": 0.9485,
+    "precision": 0.9973,
+    "recall": 0.9198,
+    "f1_score": 0.957,
+    "roc_auc": 0.9952,
+    "pr_auc": 0.9974,
+    "false_positive_rate": 0.0041,
+    "false_negative_rate": 0.0802,
+    "latency_ms": 1.586,
+    "confusion_matrix": {
+      "true_negatives": 1441,
+      "false_positives": 6,
+      "false_negatives": 192,
+      "true_positives": 2203
+    }
+  },
+  "Full_Hybrid_Ensemble": {
+    "accuracy": 0.9513,
+    "precision": 0.9973,
+    "recall": 0.9244,
+    "f1_score": 0.9595,
+    "roc_auc": 0.9952,
+    "pr_auc": 0.9975,
+    "false_positive_rate": 0.0041,
+    "false_negative_rate": 0.0756,
+    "latency_ms": 7.145,
+    "confusion_matrix": {
+      "true_negatives": 1441,
+      "false_positives": 6,
+      "false_negatives": 181,
+      "true_positives": 2214
+    }
+  }
+}

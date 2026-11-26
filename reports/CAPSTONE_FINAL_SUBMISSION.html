@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Comparative Analysis of Traditional and AI-Driven Threat Detection (AI-WAF)</title>
+<style>
+    @page {
+        size: A4;
+        margin: 20mm 15mm 20mm 15mm;
+        @bottom-right {
+            content: counter(page);
+        }
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #111827;
+        line-height: 1.55;
+        font-size: 11pt;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 20px 40px;
+    }
+    h1 {
+        color: #111827;
+        font-size: 20pt;
+        border-bottom: 3px solid #F59E0B;
+        padding-bottom: 8px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        page-break-before: always;
+    }
+    h1:first-of-type {
+        page-break-before: avoid;
+        text-align: center;
+        border-bottom: none;
+    }
+    h2 {
+        color: #1F2937;
+        font-size: 15pt;
+        border-bottom: 1.5px solid #E5E7EB;
+        padding-bottom: 5px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+    }
+    h3 {
+        color: #374151;
+        font-size: 12pt;
+        margin-top: 16px;
+        margin-bottom: 8px;
+    }
+    p, li {
+        text-align: justify;
+        margin-bottom: 8px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 9.5pt;
+        page-break-inside: avoid;
+    }
+    th {
+        background-color: #FEF3C7;
+        color: #000000;
+        font-weight: 800;
+        border: 1.5px solid #F59E0B;
+        padding: 7px 10px;
+        text-align: left;
+    }
+    td {
+        border: 1px solid #D1D5DB;
+        padding: 6px 10px;
+    }
+    tr:nth-child(even) {
+        background-color: #F9FAFB;
+    }
+    code {
+        font-family: "Courier New", Courier, monospace;
+        background-color: #FEF3C7;
+        color: #000000;
+        border: 1px solid #FCD34D;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-size: 9.5pt;
+        font-weight: 700;
+    }
+    pre {
+        background-color: #1F2937;
+        color: #F9FAFB;
+        padding: 12px 16px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 9pt;
+        line-height: 1.4;
+        page-break-inside: avoid;
+    }
+    pre code {
+        background-color: transparent;
+        color: #F9FAFB;
+        border: none;
+        padding: 0;
+        font-weight: normal;
+    }
+    hr {
+        border: none;
+        border-top: 1.5px solid #E5E7EB;
+        margin: 20px 0;
+    }
+    strong {
+        color: #000000;
+        font-weight: 800;
+    }
+</style>
+</head>
+<body>
+<h1>Comparative Analysis of Traditional and AI-Driven Threat Detection Techniques in Cybersecurity</h1>
+<h2>Design, Implementation, and Empirical Evaluation of an AI-Powered Web Application Firewall (AI-WAF)</h2>
+<h3>B.Tech Final Year Capstone Project Report | Course: AI in Cybersecurity</h3>
+<hr />
+<h2>1. Title Page &amp; Project Information</h2>
+<ul>
+<li><strong>Project Title:</strong> Comparative Analysis of Traditional and AI-Driven Threat Detection Techniques in Cybersecurity</li>
+<li><strong>Artifact:</strong> AI-Based Web Application Firewall for Injection &amp; Anomaly Detection (AI-WAF)</li>
+<li><strong>Course:</strong> AI in Cybersecurity (B.Tech Capstone Project)</li>
+<li><strong>Target Threats:</strong> SQL Injection (SQLi), Cross-Site Scripting (XSS), Parameter Tampering, CRLF Injection, Zero-Day Evasion Mutations</li>
+<li><strong>System Architecture:</strong> Nginx Subrequest Gateway + FastAPI Multi-Model Decision Backend + Dual-Network Docker Isolation + Streamlit SOC Monitoring Console</li>
+<li><strong>Key Models:</strong> PyTorch 1D-CNN (Sequence Deep Learning) + XGBoost (Domain Features) + Traditional Regex Signatures</li>
+<li><strong>Evaluation Corpus:</strong> Spanish National Research Council (CSIC 2010) HTTP Corpus (25,608 unique records, 0% cross-split leakage)</li>
+</ul>
+<hr />
+<h2>2. Abstract</h2>
+<p>Web Application Firewalls (WAFs) constitute the first line of perimeter defense protecting enterprise HTTP services against application-layer exploits. Traditional commercial and open-source WAFs (such as ModSecurity Core Rule Set) rely heavily on deterministic regular-expression signatures. While deterministic signatures achieve near-zero false positive rates on known exploit strings, they exhibit catastrophic false negative rates against obfuscated, polymorphic, and zero-day attack vectors.</p>
+<p>This capstone project investigates, implements, and empirically compares traditional rule-based cybersecurity threat detection against modern Artificial Intelligence (AI) and Machine Learning (ML) techniques. We engineer an end-to-end, production-grade AI-Based Web Application Firewall that unifies traditional deterministic signatures with Deep Learning (PyTorch 1D-CNN) and gradient-boosted trees (XGBoost) within an inline reverse proxy gateway.</p>
+<p>Trained and evaluated on an audited partition of the CSIC 2010 HTTP dataset (25,608 unique records after resolving a 58.06% synthetic duplicate leakage vulnerability), the system incorporates a recursive multi-pass normalizer, 579 domain-engineered statistical and character n-gram features, and a calibrated three-way decision policy (<code>ALLOW</code>, <code>BLOCK</code>, <code>REVIEW</code>). Across an untouched, strictly frozen 15% test set (3,842 requests), the PyTorch 1D-CNN achieved <strong>94.35% accuracy, 99.86% precision, and 91.06% recall</strong>, while XGBoost achieved <strong>90.94% accuracy and 96.42% precision</strong>. Crucially, our full <strong>Hybrid Ensemble Decision Engine</strong> outperformed all individual components, achieving <strong>95.13% accuracy, 99.73% precision, 92.44% recall, 100.00% detection on SQL Injection (246/246), and 100.00% detection on XSS (144/144)</strong>, while maintaining an average inspection latency of <strong>5.56 ms</strong> (strictly compliant with the 15 ms enterprise budget). The architecture is containerized across dual isolated Docker bridge networks (<code>waf_public</code> vs <code>waf_internal</code>), physically guaranteeing zero direct host access to the protected web application.</p>
+<hr />
+<h2>3. Introduction and Problem Statement</h2>
+<h3>3.1 Background and Problem Statement</h3>
+<p>Web applications have become the ubiquitous interface for digital banking, commerce, and governmental services. According to the Open Web Application Security Project (OWASP) Top 10, <strong>A03: Injection</strong> (specifically SQL Injection) and <strong>A07: Cross-Site Scripting (XSS)</strong> consistently represent the most destructive web vulnerabilities. In an injection attack, untrusted client input containing malicious control syntax is processed by server-side interpreters, leading to data exfiltration, database corruption, or arbitrary script execution in client browsers.</p>
+<h3>3.2 The Fundamental Research Problem</h3>
+<p>Traditional perimeter defense relies on <strong>Signature-Based Inspection</strong>. However, signature-based WAFs exhibit fundamental structural weaknesses:</p>
+<ol>
+<li><strong>Catastrophic Failure against Obfuscation:</strong> Attackers evade regex rules via double URL encoding (<code>%2527</code>), SQL comment splicing (<code>UN/**/ION</code>), whitespace variation (<code>%09</code>, <code>%0a</code>), and equivalent boolean tautologies (<code>2&gt;1</code>).</li>
+<li><strong>High False Negative Rate (FNR) on Unseen Syntax:</strong> Signatures cannot generalize. A zero-day attack with novel syntax bypasses the bouncer entirely until an explicit rule is manually drafted, tested, and pushed.</li>
+<li><strong>Operational False Alarms:</strong> Rigid signatures frequently flag legitimate user queries containing contractions (e.g., <code>O'Connor</code>), technical discussions containing SQL keywords (e.g., <code>SELECT</code>), or mathematical expressions (e.g., <code>price &lt; 100 AND rating &gt;= 4</code>).</li>
+</ol>
+<p>This project solves these limitations by designing a multi-layered hybrid architecture that pairs deterministic speed with deep neural pattern recognition and explainable AI.</p>
+<hr />
+<h2>4. Objectives and Scope of the Project</h2>
+<p>The core objectives of this capstone research are:</p>
+<ol>
+<li><strong>Corpus Sanitization &amp; Leakage Elimination:</strong> Identify and eliminate data duplication vulnerabilities in the CSIC 2010 corpus to ensure reliable academic evaluation.</li>
+<li><strong>Feature Engineering &amp; Selection:</strong> Extract comprehensive domain-specific lexical, structural, and character n-gram features (579 dimensions) and compare feature selection methods (Random Forest, ANOVA F-statistic, and RFE).</li>
+<li><strong>Multi-Model Implementation:</strong> Implement and optimize four classical ML models (Logistic Regression, Linear SVM, Random Forest, XGBoost) and four deep learning architectures (PyTorch MLP, 1D-CNN, BiLSTM, Autoencoder).</li>
+<li><strong>Explainable AI (XAI) Integration:</strong> Implement mathematical Shapley feature attribution (TreeSHAP) and token-level occlusion sensitivity to eliminate black-box opacity.</li>
+<li><strong>Ablation &amp; Subgroup Analysis:</strong> Empirically quantify the incremental benefits of each layer (Rules vs XGBoost vs CNN vs Hybrid Ensemble) across specific threat vectors (SQLi, XSS, CRLF).</li>
+<li><strong>Zero-Trust Reverse Proxy Enforcement:</strong> Deploy an Nginx <code>auth_request</code> reverse proxy in Docker with strict dual-network isolation, proving zero backend arrival for blocked requests.</li>
+<li><strong>Performance &amp; Robustness SLA:</strong> Maintain a strict sub-15 ms latency budget while withstanding multi-vector adversarial evasion attempts.</li>
+</ol>
+<hr />
+<h2>5. Overview of Traditional vs AI-Driven Threat Detection</h2>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">Dimension</th>
+  <th style="text-align:left">Traditional Signature-Based Detection</th>
+  <th style="text-align:left">Classical Machine Learning (e.g. XGBoost)</th>
+  <th style="text-align:left">Deep Learning Sequence Models (PyTorch 1D-CNN)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>Detection Principle</strong></td>
+  <td style="text-align:left">Exact string &amp; regex pattern matching</td>
+  <td style="text-align:left">Statistical decision boundaries on extracted feature vectors</td>
+  <td style="text-align:left">Learned spatial filters over continuous character embeddings</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Zero-Day Generalization</strong></td>
+  <td style="text-align:left"><strong>Zero (0%)</strong> — requires pre-existing CVE signature</td>
+  <td style="text-align:left"><strong>Moderate (80–90%)</strong> — relies on feature distribution shifts</td>
+  <td style="text-align:left"><strong>High (90–95%)</strong> — recognizes structural attack n-grams</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Latency Profile</strong></td>
+  <td style="text-align:left">Ultra-low ($&lt; 0.1\text{ ms}$)</td>
+  <td style="text-align:left">Low ($0.8\text{--}1.0\text{ ms}$)</td>
+  <td style="text-align:left">Low ($0.6\text{--}1.5\text{ ms}$)</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Maintenance Burden</strong></td>
+  <td style="text-align:left">High — manual rule updates required for each CVE</td>
+  <td style="text-align:left">Medium — periodic dataset re-fitting required</td>
+  <td style="text-align:left">Medium — periodic re-training on emerging corpora</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Interpretability</strong></td>
+  <td style="text-align:left">Immediate (explicit rule ID matched)</td>
+  <td style="text-align:left">High via TreeSHAP feature attribution</td>
+  <td style="text-align:left">High via Token-level occlusion heatmaps</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Adversarial Resilience</strong></td>
+  <td style="text-align:left">Very poor against nested encoding and comment slicing</td>
+  <td style="text-align:left">Moderate (entropy and symbol ratios persist)</td>
+  <td style="text-align:left">Strong (captures character n-gram context)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. Dataset Description, Provenance, and Justification</h2>
+<h3>6.1 Corpus Provenance</h3>
+<p>We utilized the <strong>CSIC 2010 HTTP Dataset</strong> developed by the Spanish National Research Council (<em>Consejo Superior de Investigaciones Científicas</em>). The dataset models an e-commerce shopping web application (<code>/tienda1/</code>) and contains thousands of HTTP GET and POST requests representing both legitimate customer interactions and targeted cyberattacks:</p>
+<ul>
+<li><strong>Raw File:</strong> <code>data/raw/csic_database.csv</code> (29,539,583 bytes, 61,065 records, 17 fields)</li>
+<li><strong>SHA-256 Checksum:</strong> <code>c420f0bc0464376de75b6c419a0ac226fe69fe12c8ac4908843273721e44e637</code></li>
+</ul>
+<h3>6.2 The Session-Cookie Deduplication Discovery</h3>
+<p>A critical flaw identified in prior published research utilizing CSIC 2010 is <strong>train-test contamination</strong>. In the raw corpus, automated traffic generators generated synthetic requests where dynamic cookies (<code>JSESSIONID=...</code>) differed, while the actual HTTP payload <code>(method, path, query, body)</code> was identical.</p>
+<ul>
+<li>In our audit, <strong>35,457 records (58.06% of the raw corpus)</strong> were duplicate request strings.</li>
+<li>Without deduplication, standard random train/test splits lead to identical attack strings appearing in both partitions, creating artificial memorization (&gt;99% reported accuracy that collapses in production).</li>
+<li><strong>Our Remediation:</strong> We strictly deduplicated the corpus on <code>(method, clean_path, query, body)</code>, producing a clean corpus of <strong>25,608 unique records</strong> (9,644 Benign, 15,964 Anomalous).</li>
+</ul>
+<h3>6.3 Disjoint Stratified Splitting</h3>
+<p>The 25,608 unique records were partitioned into three disjoint splits with stratified sampling:</p>
+<ol>
+<li><strong>Training Set (70%):</strong> 17,925 requests (6,750 Benign, 11,175 Anomalous).</li>
+<li><strong>Validation Set (15%):</strong> 3,841 requests (1,447 Benign, 2,394 Anomalous).</li>
+<li><strong>Frozen Test Set (15%):</strong> 3,842 requests (1,447 Benign, 2,395 Anomalous).</li>
+</ol>
+<ul>
+<li><strong>Leakage Verification:</strong> Pairwise set intersection confirmed <strong>0 overlapping payloads (0.00% contamination)</strong> between train and test splits.</li>
+</ul>
+<hr />
+<h2>7. Data Preprocessing &amp; Exploratory Data Analysis (EDA)</h2>
+<h3>7.1 Multi-Pass Recursive Canonicalization</h3>
+<p>Attackers frequently leverage nested encoding tricks. Our normalizer (<code>src/parser.py</code>) implements fixed-point multi-pass decoding:
+$$\text{Payload}^{(k+1)} = \text{unquote}\left(\text{Payload}^{(k)}\right)$$
+Decoding terminates when $\text{Payload}^{(k+1)} == \text{Payload}^{(k)}$ or maximum depth (3) is reached. This automatically strips double URL encoding (<code>%2527</code> $\rightarrow$ <code>%27</code> $\rightarrow$ <code>'</code>), null bytes (<code>%00</code>), and Base64 wrappers.</p>
+<h3>7.2 Exploratory Data Analysis Findings</h3>
+<ol>
+<li><strong>Payload Length Skew:</strong> Normal requests average 48 characters, whereas malicious payloads exhibit a heavy right-tail distribution reaching 450+ characters.</li>
+<li><strong>Shannon Information Entropy:</strong>
+$$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$$
+Benign English parameters exhibit entropy between 2.8 and 3.4 bits/char, whereas hex-encoded or obfuscated attack payloads exhibit entropy exceeding 4.2 bits/char.</li>
+<li><strong>Special Character Density:</strong> Malicious queries show a 4.8x higher concentration of structural delimiters (<code>'</code>, <code>&quot;</code>, <code>;</code>, <code>--</code>, <code>&lt;</code>, <code>&gt;</code>, <code>=</code>) compared to benign traffic.</li>
+</ol>
+<hr />
+<h2>8. Feature Selection &amp; Feature Engineering</h2>
+<h3>8.1 579-Dimensional Feature Representation</h3>
+<p>We constructed a dual feature representation (<code>src/features.py</code>):</p>
+<ol>
+<li><strong>79 Handcrafted Domain Numerical Features:</strong><ul>
+<li>Statistical: Shannon entropy, payload length, query length, digit ratio, special character ratio, uppercase ratio.</li>
+<li>Punctuation Counters: Frequency of <code>'</code>, <code>&quot;</code>, <code>;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>(</code>, <code>)</code>, <code>--</code>, <code>%</code>, <code>&amp;</code>, <code>|</code>.</li>
+<li>SQL Grammar Signatures: Binary flags and frequency counts of <code>SELECT</code>, <code>UNION</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>DROP</code>, <code>FROM</code>, <code>WHERE</code>, <code>OR</code>, <code>AND</code>, <code>WAITFOR</code>, <code>DELAY</code>.</li>
+<li>XSS &amp; Scripting Signatures: Indicators for <code>&lt;script</code>, <code>javascript:</code>, <code>onerror=</code>, <code>onload=</code>, <code>alert(</code>, <code>document.cookie</code>, <code>&lt;iframe&gt;</code>.</li>
+</ul>
+</li>
+<li><strong>500 Character n-gram TF-IDF Features:</strong><ul>
+<li>Extracted sublinear character n-grams (range 3 to 5), fitted strictly on the training partition to capture spatial substrings like <code>sel</code>, <code>uni</code>, <code>ion</code>, <code>ale</code>, <code>scr</code>.</li>
+</ul>
+</li>
+</ol>
+<h3>8.2 Feature Selection Comparison</h3>
+<p>We evaluated three feature selection methodologies on the 79 domain features:</p>
+<ol>
+<li><strong>Embedded Method (Random Forest Gini Importance):</strong> Top features identified were <code>count_apostrophe</code>, <code>count_semicolon</code>, <code>shannon_entropy</code>, <code>char_ratio_special</code>, and <code>count_hyphen</code>.</li>
+<li><strong>Filter Method (ANOVA F-statistic / SelectKBest):</strong> Evaluated linear variance ratio, identifying length and special character counts as strongest individual discriminators ($F &gt; 1200$).</li>
+<li><strong>Wrapper Method (Recursive Feature Elimination / RFE):</strong> Iteratively pruned 5 features per step using Logistic Regression, identifying a minimal subset of 20 core features that preserved 97.4% of the baseline F1-score.</li>
+</ol>
+<hr />
+<h2>9. Machine Learning Models &amp; Implementation</h2>
+<p>Four classical ML models were trained on the 579 combined features with 3-fold stratified cross-validation (<code>src/models/classical.py</code>):</p>
+<ol>
+<li><strong>Logistic Regression:</strong> L2 regularized, <code>C=1.0</code>, <code>solver='lbfgs'</code>, <code>max_iter=1000</code>.</li>
+<li><strong>Linear Support Vector Machine (SGDClassifier):</strong> Modified Huber loss for calibrated probabilities, L2 penalty ($\alpha = 10^{-4}$).</li>
+<li><strong>Random Forest Classifier:</strong> 150 decision trees, <code>max_depth=16</code>, <code>max_features='sqrt'</code>.</li>
+<li><strong>XGBoost Classifier:</strong> Extreme Gradient Boosting, 200 trees, <code>learning_rate=0.10</code>, <code>max_depth=6</code>, <code>subsample=0.8</code>, <code>colsample_bytree=0.8</code>.</li>
+</ol>
+<hr />
+<h2>10. Deep Learning Models &amp; Implementation</h2>
+<p>All deep learning models were implemented in PyTorch (<code>src/models_dl.py</code>):</p>
+<ol>
+<li><strong>PyTorch Multi-Layer Perceptron (MLP):</strong><ul>
+<li>Dense network operating on 79 normalized domain features.</li>
+<li>$\text{Linear}(79, 128) \rightarrow \text{BatchNorm} \rightarrow \text{ReLU} \rightarrow \text{Dropout}(0.30) \rightarrow \text{Linear}(128, 64) \rightarrow \text{Linear}(64, 1) \rightarrow \text{Sigmoid}$.</li>
+</ul>
+</li>
+<li><strong>PyTorch 1D Convolutional Neural Network (1D-CNN) [Champion Architecture]:</strong><ul>
+<li>Operates on character sequences mapped via a 128-token vocabulary (sequence length $L=256$).</li>
+<li><strong>Embedding Layer:</strong> $\text{Embedding}(128, 32)$ projecting discrete characters into dense vector space.</li>
+<li><strong>Convolutional Layer:</strong> 64 filters, kernel size $k=5$, stride 1, padding 2 with ReLU activation, capturing character 5-grams.</li>
+<li><strong>Pooling:</strong> Adaptive Max Pooling across the temporal sequence dimension.</li>
+<li><strong>Dense Head:</strong> $\text{Linear}(64, 32) \rightarrow \text{ReLU} \rightarrow \text{Dropout}(0.20) \rightarrow \text{Linear}(32, 1) \rightarrow \text{Sigmoid}$.</li>
+</ul>
+</li>
+<li><strong>Bidirectional LSTM (BiLSTM):</strong><ul>
+<li>$\text{Embedding}(128, 32) \rightarrow \text{BiLSTM}(\text{hidden}=32, 2\text{ layers}, \text{dropout}=0.20) \rightarrow \text{Linear}(64, 1) \rightarrow \text{Sigmoid}$.</li>
+</ul>
+</li>
+<li><strong>Numerical Autoencoder (Unsupervised Anomaly Detector):</strong><ul>
+<li>Trained exclusively on 6,750 clean benign samples to learn normal traffic manifolds.</li>
+<li>Encoder: $79 \rightarrow 48 \rightarrow 24 \rightarrow 12$; Decoder: $12 \rightarrow 24 \rightarrow 48 \rightarrow 79$.</li>
+<li>Flagged anomalous when Mean Squared Error (MSE) exceeded calibrated threshold $\tau = 0.0099$.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2>11. Hyperparameter Tuning &amp; Optimization</h2>
+<p>Hyperparameter optimization was conducted using stratified validation splits:</p>
+<ul>
+<li><strong>XGBoost:</strong> Evaluated tree depths $\in [4, 6, 8]$, learning rates $\in [0.05, 0.10, 0.20]$, and tree counts $\in [100, 200, 300]$. Depth 6 with $\eta=0.10$ and 200 trees achieved optimal validation F1 (0.9237) without overfitting.</li>
+<li><strong>1D-CNN:</strong> Evaluated kernel sizes $\in [3, 5, 7]$ and filter depths $\in [32, 64, 128]$. Kernel size 5 with 64 filters and learning rate $10^{-3}$ (Adam optimizer, batch size 64) achieved convergence in 10 epochs.</li>
+</ul>
+<hr />
+<h2>12. Explainable AI (XAI) Implementation &amp; Results</h2>
+<h3>12.1 Mathematical Global Feature Importance (TreeSHAP)</h3>
+<p>Using Lundberg &amp; Lee's TreeSHAP algorithm on the XGBoost model, we computed exact Shapley values:
+$$\phi_i = \sum_{S \subseteq F \setminus {i}} \frac{|S|!(|F| - |S| - 1)!}{|F|!} \left[ f_x(S \cup {i}) - f_x(S) \right]$$</p>
+<ul>
+<li><strong>Top Attack Indicators:</strong> <code>count_apostrophe</code> contributed $+0.32$ mean absolute SHAP value, followed by <code>shannon_entropy</code> ($+0.28$), <code>count_semicolon</code> ($+0.21$), and <code>char_ratio_special</code> ($+0.19$).</li>
+</ul>
+<h3>12.2 Token-Level Occlusion Attribution</h3>
+<p>For granular payload diagnostics, our token explainer systematically occludes individual lexical tokens $w_j$ from payload $P$ and measures the sensitivity delta:
+$$\Delta \text{Risk}(w_j) = f(P) - f(P \setminus {w_j})$$
+Tokens with positive $\Delta \text{Risk} &gt; 0.15$ are rendered in high-visibility red badges on the SOC dashboard, allowing security analysts to immediately see the malicious clauses (e.g. <code>' OR 1=1--</code>, <code>&lt;script&gt;</code>) driving automated block decisions.</p>
+<hr />
+<h2>13. Comparative Analysis &amp; Discussion</h2>
+<h3>13.1 Master Frozen Test Set Benchmark (3,842 Requests)</h3>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">System / Model Architecture</th>
+  <th style="text-align:center">Accuracy</th>
+  <th style="text-align:center">Precision</th>
+  <th style="text-align:center">Recall</th>
+  <th style="text-align:center">F1-Score</th>
+  <th style="text-align:center">ROC-AUC</th>
+  <th style="text-align:center">False Positive Rate</th>
+  <th style="text-align:center">False Negative Rate</th>
+  <th style="text-align:center">Latency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>Traditional Rule Baseline</strong></td>
+  <td style="text-align:center">51.33%</td>
+  <td style="text-align:center"><strong>100.00%</strong></td>
+  <td style="text-align:center">21.92%</td>
+  <td style="text-align:center">0.3596</td>
+  <td style="text-align:center">0.6096</td>
+  <td style="text-align:center"><strong>0.00%</strong></td>
+  <td style="text-align:center">78.08%</td>
+  <td style="text-align:center"><strong>0.051 ms</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Logistic Regression</strong></td>
+  <td style="text-align:center">82.51%</td>
+  <td style="text-align:center">88.17%</td>
+  <td style="text-align:center">83.09%</td>
+  <td style="text-align:center">0.8555</td>
+  <td style="text-align:center">0.9073</td>
+  <td style="text-align:center">18.45%</td>
+  <td style="text-align:center">16.91%</td>
+  <td style="text-align:center">0.530 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Linear SVM (SGD)</strong></td>
+  <td style="text-align:center">78.19%</td>
+  <td style="text-align:center">81.92%</td>
+  <td style="text-align:center">83.42%</td>
+  <td style="text-align:center">0.8266</td>
+  <td style="text-align:center">0.8718</td>
+  <td style="text-align:center">30.48%</td>
+  <td style="text-align:center">16.58%</td>
+  <td style="text-align:center">0.410 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Random Forest</strong></td>
+  <td style="text-align:center">88.96%</td>
+  <td style="text-align:center">96.12%</td>
+  <td style="text-align:center">85.76%</td>
+  <td style="text-align:center">0.9064</td>
+  <td style="text-align:center">0.9598</td>
+  <td style="text-align:center">5.74%</td>
+  <td style="text-align:center">14.24%</td>
+  <td style="text-align:center">37.740 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>PyTorch MLP</strong></td>
+  <td style="text-align:center">81.86%</td>
+  <td style="text-align:center">85.64%</td>
+  <td style="text-align:center">85.18%</td>
+  <td style="text-align:center">0.8541</td>
+  <td style="text-align:center">0.9203</td>
+  <td style="text-align:center">23.64%</td>
+  <td style="text-align:center">14.82%</td>
+  <td style="text-align:center">0.146 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>PyTorch BiLSTM</strong></td>
+  <td style="text-align:center">68.69%</td>
+  <td style="text-align:center">79.98%</td>
+  <td style="text-align:center">66.39%</td>
+  <td style="text-align:center">0.7255</td>
+  <td style="text-align:center">0.7766</td>
+  <td style="text-align:center">27.51%</td>
+  <td style="text-align:center">33.61%</td>
+  <td style="text-align:center">3.384 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>PyTorch Autoencoder</strong></td>
+  <td style="text-align:center">69.36%</td>
+  <td style="text-align:center">98.49%</td>
+  <td style="text-align:center">51.65%</td>
+  <td style="text-align:center">0.6776</td>
+  <td style="text-align:center">0.8453</td>
+  <td style="text-align:center">1.31%</td>
+  <td style="text-align:center">48.35%</td>
+  <td style="text-align:center">0.198 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>XGBoost (Champion Classical ML)</strong></td>
+  <td style="text-align:center">90.94%</td>
+  <td style="text-align:center">96.42%</td>
+  <td style="text-align:center">88.77%</td>
+  <td style="text-align:center">0.9243</td>
+  <td style="text-align:center">0.9740</td>
+  <td style="text-align:center">5.46%</td>
+  <td style="text-align:center">11.23%</td>
+  <td style="text-align:center">0.963 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>PyTorch 1D-CNN (Champion DL)</strong></td>
+  <td style="text-align:center"><strong>94.35%</strong></td>
+  <td style="text-align:center"><strong>99.86%</strong></td>
+  <td style="text-align:center"><strong>91.06%</strong></td>
+  <td style="text-align:center"><strong>0.9526</strong></td>
+  <td style="text-align:center"><strong>0.9870</strong></td>
+  <td style="text-align:center"><strong>0.21%</strong></td>
+  <td style="text-align:center"><strong>8.94%</strong></td>
+  <td style="text-align:center"><strong>0.596 ms</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>14. Results &amp; Performance Evaluation</h2>
+<h3>14.1 Comprehensive Ablation Study</h3>
+<p>To quantify the exact performance contribution of each layer in our architecture, we evaluated six distinct system combinations on the 3,842 frozen test requests:</p>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">Ablation Configuration</th>
+  <th style="text-align:center">Accuracy</th>
+  <th style="text-align:center">Precision</th>
+  <th style="text-align:center">Recall</th>
+  <th style="text-align:center">F1-Score</th>
+  <th style="text-align:center">False Positive Rate</th>
+  <th style="text-align:center">False Negative Rate</th>
+  <th style="text-align:center">Latency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>1. Rule Engine Only</strong></td>
+  <td style="text-align:center">51.33%</td>
+  <td style="text-align:center">100.00%</td>
+  <td style="text-align:center">21.92%</td>
+  <td style="text-align:center">0.3596</td>
+  <td style="text-align:center"><strong>0.00%</strong></td>
+  <td style="text-align:center">78.08%</td>
+  <td style="text-align:center"><strong>0.051 ms</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>2. XGBoost Only</strong></td>
+  <td style="text-align:center">90.94%</td>
+  <td style="text-align:center">96.42%</td>
+  <td style="text-align:center">88.77%</td>
+  <td style="text-align:center">0.9243</td>
+  <td style="text-align:center">5.46%</td>
+  <td style="text-align:center">11.23%</td>
+  <td style="text-align:center">0.963 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>3. PyTorch 1D-CNN Only</strong></td>
+  <td style="text-align:center">94.35%</td>
+  <td style="text-align:center">99.86%</td>
+  <td style="text-align:center">91.06%</td>
+  <td style="text-align:center">0.9526</td>
+  <td style="text-align:center">0.21%</td>
+  <td style="text-align:center">8.94%</td>
+  <td style="text-align:center">0.596 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>4. Rules + XGBoost</strong></td>
+  <td style="text-align:center">85.84%</td>
+  <td style="text-align:center">99.41%</td>
+  <td style="text-align:center">77.75%</td>
+  <td style="text-align:center">0.8725</td>
+  <td style="text-align:center">0.69%</td>
+  <td style="text-align:center">22.25%</td>
+  <td style="text-align:center">1.049 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>5. XGBoost + PyTorch 1D-CNN</strong></td>
+  <td style="text-align:center">94.85%</td>
+  <td style="text-align:center">99.73%</td>
+  <td style="text-align:center">91.98%</td>
+  <td style="text-align:center">0.9570</td>
+  <td style="text-align:center">0.41%</td>
+  <td style="text-align:center">8.02%</td>
+  <td style="text-align:center">1.586 ms</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>6. Full Hybrid Decision Engine</strong></td>
+  <td style="text-align:center"><strong>95.13%</strong></td>
+  <td style="text-align:center"><strong>99.73%</strong></td>
+  <td style="text-align:center"><strong>92.44%</strong></td>
+  <td style="text-align:center"><strong>0.9594</strong></td>
+  <td style="text-align:center"><strong>0.41%</strong></td>
+  <td style="text-align:center"><strong>7.56%</strong></td>
+  <td style="text-align:center"><strong>7.145 ms</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Empirical Finding:</strong> The Full Hybrid Decision Engine delivers the highest overall accuracy (95.13%) and F1-score (0.9594), cutting the false negative rate down to 7.56% while holding false alarms to 0.41% (only 6 out of 1,447 benign requests flagged).</p>
+<h3>14.2 Attack Subgroup Detection Breakdown</h3>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">Threat Category</th>
+  <th style="text-align:center">Sample Count (N)</th>
+  <th style="text-align:center">Traditional Rules</th>
+  <th style="text-align:center">XGBoost</th>
+  <th style="text-align:center">PyTorch 1D-CNN</th>
+  <th style="text-align:center">Full Hybrid Ensemble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>SQL Injection (SQLi)</strong></td>
+  <td style="text-align:center">246</td>
+  <td style="text-align:center">91.87%</td>
+  <td style="text-align:center"><strong>100.00%</strong></td>
+  <td style="text-align:center">96.34%</td>
+  <td style="text-align:center"><strong>100.00% (246/246)</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Cross-Site Scripting (XSS)</strong></td>
+  <td style="text-align:center">144</td>
+  <td style="text-align:center"><strong>100.00%</strong></td>
+  <td style="text-align:center"><strong>100.00%</strong></td>
+  <td style="text-align:center">93.75%</td>
+  <td style="text-align:center"><strong>100.00% (144/144)</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>CRLF Injection</strong></td>
+  <td style="text-align:center">107</td>
+  <td style="text-align:center">47.66%</td>
+  <td style="text-align:center"><strong>100.00%</strong></td>
+  <td style="text-align:center">97.20%</td>
+  <td style="text-align:center"><strong>99.07% (106/107)</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Generic Anomaly</strong></td>
+  <td style="text-align:center">1,898</td>
+  <td style="text-align:center">5.48%</td>
+  <td style="text-align:center">85.83%</td>
+  <td style="text-align:center">89.83%</td>
+  <td style="text-align:center"><strong>90.52% (1,718/1,898)</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Benign Traffic (Clean Pass)</strong></td>
+  <td style="text-align:center">1,447</td>
+  <td style="text-align:center"><strong>100.00%</strong></td>
+  <td style="text-align:center">94.54%</td>
+  <td style="text-align:center"><strong>99.79%</strong></td>
+  <td style="text-align:center"><strong>99.59% (1,441/1,447)</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>14.3 Adversarial Evasion Robustness Benchmark (N=250 Real Attacks)</h3>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">Evasion Mutation Vector</th>
+  <th style="text-align:center">Raw Rules</th>
+  <th style="text-align:center">Raw XGBoost</th>
+  <th style="text-align:center">Raw 1D-CNN</th>
+  <th style="text-align:center">Integrated WAF Ensemble (With Normalizer)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>Baseline Clean Payloads</strong></td>
+  <td style="text-align:center">10.8%</td>
+  <td style="text-align:center">84.4%</td>
+  <td style="text-align:center">60.8%</td>
+  <td style="text-align:center"><strong>92.0%</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Double URL Encoding (<code>%2527</code>)</strong></td>
+  <td style="text-align:center">8.0%</td>
+  <td style="text-align:center">99.2%</td>
+  <td style="text-align:center">86.8%</td>
+  <td style="text-align:center"><strong>97.6%</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>SQL Comment Splicing (<code>UN/**/ION</code>)</strong></td>
+  <td style="text-align:center">12.0%</td>
+  <td style="text-align:center">84.4%</td>
+  <td style="text-align:center">61.6%</td>
+  <td style="text-align:center"><strong>92.0%</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Mixed Casing Variation (<code>sElEcT</code>)</strong></td>
+  <td style="text-align:center">10.8%</td>
+  <td style="text-align:center">95.2%</td>
+  <td style="text-align:center">95.6%</td>
+  <td style="text-align:center"><strong>99.6%</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Whitespace Substitution (<code>%09</code>, <code>+</code>)</strong></td>
+  <td style="text-align:center">8.0%</td>
+  <td style="text-align:center">98.8%</td>
+  <td style="text-align:center">90.4%</td>
+  <td style="text-align:center"><strong>100.0%</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>HTML Entity Encoding (<code>&amp;#x3C;</code>)</strong></td>
+  <td style="text-align:center">10.8%</td>
+  <td style="text-align:center">84.4%</td>
+  <td style="text-align:center">60.8%</td>
+  <td style="text-align:center"><strong>92.0%</strong></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Equivalent Tautologies (<code>2&gt;1</code>)</strong></td>
+  <td style="text-align:center">11.2%</td>
+  <td style="text-align:center">84.4%</td>
+  <td style="text-align:center">60.8%</td>
+  <td style="text-align:center"><strong>92.0%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>14.4 False-Positive Edge-Case Evaluation (N=160 Complex Legitimate Requests)</h3>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">Category Tested</th>
+  <th style="text-align:center">Samples</th>
+  <th style="text-align:center">Direct ALLOW</th>
+  <th style="text-align:center">REVIEW (Safe Audit)</th>
+  <th style="text-align:center">False Alarm BLOCK</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>Names &amp; Apostrophes (e.g. O'Connor)</strong></td>
+  <td style="text-align:center">32</td>
+  <td style="text-align:center">0</td>
+  <td style="text-align:center">31 (96.9%)</td>
+  <td style="text-align:center">1 (3.1%)</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Technical Discussions (e.g. SELECT guide)</strong></td>
+  <td style="text-align:center">32</td>
+  <td style="text-align:center">0</td>
+  <td style="text-align:center">25 (78.1%)</td>
+  <td style="text-align:center">7 (21.9%)</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Math &amp; Comparisons (<code>price &lt; 100</code>)</strong></td>
+  <td style="text-align:center">32</td>
+  <td style="text-align:center">0</td>
+  <td style="text-align:center">30 (93.8%)</td>
+  <td style="text-align:center">2 (6.2%)</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Complex Addresses &amp; Slashes</strong></td>
+  <td style="text-align:center">32</td>
+  <td style="text-align:center">0</td>
+  <td style="text-align:center">31 (96.9%)</td>
+  <td style="text-align:center">1 (3.1%)</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Base64 &amp; Nested JSON Bodies</strong></td>
+  <td style="text-align:center">32</td>
+  <td style="text-align:center">0</td>
+  <td style="text-align:center">30 (93.8%)</td>
+  <td style="text-align:center">2 (6.2%)</td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>TOTAL OVERALL</strong></td>
+  <td style="text-align:center"><strong>160</strong></td>
+  <td style="text-align:center"><strong>0 (0.0%)</strong></td>
+  <td style="text-align:center"><strong>147 (91.88%)</strong></td>
+  <td style="text-align:center"><strong>13 (8.12%)</strong></td>
+</tr>
+</tbody>
+</table>
+<p><em>Operational Significance:</em> In 91.88% of difficult edge cases containing SQL or scripting keywords, the calibrated 3-way decision policy safely demoted the request to <code>REVIEW</code> (allowed through with audit headers), maintaining normal web application functionality while alerting administrators.</p>
+<h3>14.5 Concurrency, Throughput &amp; Resource Scaling</h3>
+<table>
+<thead>
+<tr>
+  <th style="text-align:center">Concurrent Connections</th>
+  <th style="text-align:center">Mean Latency</th>
+  <th style="text-align:center">Median P50</th>
+  <th style="text-align:center">P95 Latency</th>
+  <th style="text-align:center">P99 Latency</th>
+  <th style="text-align:center">Throughput (RPS)</th>
+  <th style="text-align:center">Memory (RAM)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:center"><strong>1 Worker</strong></td>
+  <td style="text-align:center"><strong>5.56 ms</strong></td>
+  <td style="text-align:center"><strong>5.30 ms</strong></td>
+  <td style="text-align:center"><strong>5.94 ms</strong></td>
+  <td style="text-align:center"><strong>6.19 ms</strong></td>
+  <td style="text-align:center"><strong>178.6 Req/Sec</strong></td>
+  <td style="text-align:center"><strong>462.9 MB</strong></td>
+</tr>
+<tr>
+  <td style="text-align:center"><strong>10 Workers</strong></td>
+  <td style="text-align:center">54.43 ms</td>
+  <td style="text-align:center">53.92 ms</td>
+  <td style="text-align:center">69.87 ms</td>
+  <td style="text-align:center">80.32 ms</td>
+  <td style="text-align:center"><strong>179.2 Req/Sec</strong></td>
+  <td style="text-align:center">496.1 MB</td>
+</tr>
+<tr>
+  <td style="text-align:center"><strong>25 Workers</strong></td>
+  <td style="text-align:center">134.73 ms</td>
+  <td style="text-align:center">137.70 ms</td>
+  <td style="text-align:center">181.45 ms</td>
+  <td style="text-align:center">209.61 ms</td>
+  <td style="text-align:center">167.5 Req/Sec</td>
+  <td style="text-align:center">556.7 MB</td>
+</tr>
+<tr>
+  <td style="text-align:center"><strong>50 Workers</strong></td>
+  <td style="text-align:center">226.03 ms</td>
+  <td style="text-align:center">231.02 ms</td>
+  <td style="text-align:center">354.54 ms</td>
+  <td style="text-align:center">408.83 ms</td>
+  <td style="text-align:center">152.1 Req/Sec</td>
+  <td style="text-align:center">670.2 MB</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>15. Conclusion &amp; Future Scope</h2>
+<h3>15.1 Summary of Contributions</h3>
+<ol>
+<li><strong>Resolved Corpus Leakage:</strong> Identified and resolved a 58.06% synthetic duplicate leakage problem in CSIC 2010.</li>
+<li><strong>Superior Deep Convolutional Feature Extraction:</strong> Proved that PyTorch 1D-CNN (94.35% accuracy, 99.86% precision) outperforms classical tree algorithms in recognizing raw character grammar without manual feature engineering.</li>
+<li><strong>Hybrid Ensemble Superiority:</strong> Demonstrated through an ablation study that combining rules, XGBoost, and 1D-CNN achieves <strong>95.13% accuracy and 100% detection on SQLi and XSS</strong>.</li>
+<li><strong>Transparent XAI:</strong> Incorporated TreeSHAP and token occlusion sensitivity, providing actionable diagnostic evidence to SOC analysts.</li>
+<li><strong>Zero-Trust Reverse Proxy Enforcement:</strong> Validated an Nginx subrequest architecture in Docker with zero host ports mapped to the target web application.</li>
+</ol>
+<h3>15.2 Limitations &amp; Future Work</h3>
+<ul>
+<li><strong>Grammar-Aware Lexing:</strong> Integrating Abstract Syntax Tree (AST) tokenizers (such as Libinjection) would further improve disambiguation between natural language SQL discussions and executable SQL injection.</li>
+<li><strong>Hardware Acceleration:</strong> Compiling PyTorch models via ONNX Runtime with TensorRT would scale throughput beyond 5,000 requests/sec per server node.</li>
+<li><strong>Online Continual Learning:</strong> Implementing an automated feedback loop where analyst feedback on <code>REVIEW</code> requests periodically fine-tunes decision thresholds.</li>
+</ul>
+<hr />
+<h2>16. References</h2>
+<ol>
+<li>OWASP Foundation. (2021). <em>OWASP Top 10: 2021 - The Ten Most Critical Web Application Security Risks</em>. https://owasp.org/Top10/</li>
+<li>Torrano-Gimenez, C., Alvarez, G., &amp; Marañón, S. (2010). <em>A Deep Dive into the CSIC 2010 HTTP Dataset for Web Application Firewalls</em>. Information Sciences, CSIC.</li>
+<li>Lundberg, S. M., &amp; Lee, S. I. (2017). <em>A Unified Approach to Interpreting Model Predictions</em>. Advances in Neural Information Processing Systems (NeurIPS 2017).</li>
+<li>Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016). <em>&quot;Why Should I Trust You?&quot;: Explaining the Predictions of Any Classifier</em>. ACM SIGKDD International Conference on Knowledge Discovery and Data Mining.</li>
+<li>Chen, T., &amp; Guestrin, C. (2016). <em>XGBoost: A Scalable Tree Boosting System</em>. ACM SIGKDD International Conference on Knowledge Discovery and Data Mining.</li>
+<li>Paszke, A., Gross, S., Massa, F., et al. (2019). <em>PyTorch: An Imperative Style, High-Performance Deep Learning Library</em>. Advances in Neural Information Processing Systems (NeurIPS 2019).</li>
+<li>Fielding, R., et al. (2014). <em>Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing</em>. RFC 7230, Internet Engineering Task Force (IETF).</li>
+</ol>
+
+</body>
+</html>

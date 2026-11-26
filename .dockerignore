@@ -1,0 +1,30 @@
+# Git and editor artifacts
+.git
+.gitignore
+.vscode
+.idea
+*.swp
+*.swo
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+.coverage
+htmlcov/
+
+# Local virtual environment
+venv/
+.venv/
+env/
+.env
+
+# Large raw datasets (interim/processed models are needed by backend, but raw csvs are not)
+data/raw/*.csv
+data/interim/
+data/processed/
+
+# System and logs
+.system_generated/
+*.log

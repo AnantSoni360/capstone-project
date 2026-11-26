@@ -1,0 +1,251 @@
+{
+  "xai_engine": "TreeSHAP + Localized Token Occlusion",
+  "underlying_model": "XGBoost Classifier",
+  "case_studies": {
+    "SQL_INJECTION": {
+      "request_url": "http://localhost:8080/tienda1/publico/anadir.jsp?id=1%27%20UNION%20SELECT%20username,password%20FROM%20usuarios-- HTTP/1.1",
+      "model_malicious_probability": 0.9999,
+      "verdict": "BLOCK",
+      "shap_attribution": {
+        "base_value": 0.5413,
+        "top_contributing_features": [
+          {
+            "feature": "ratio_specials",
+            "shap_value": 1.6228,
+            "input_value": 0.7689
+          },
+          {
+            "feature": "ratio_single_quote",
+            "shap_value": 1.1402,
+            "input_value": 0.977
+          },
+          {
+            "feature": "ratio_space",
+            "shap_value": 0.9389,
+            "input_value": 3.4427
+          },
+          {
+            "feature": "ratio_uppers",
+            "shap_value": 0.6864,
+            "input_value": 5.4308
+          },
+          {
+            "feature": "tfidf_arri",
+            "shap_value": 0.6303,
+            "input_value": 0.0
+          }
+        ],
+        "benign_stabilizing_features": [
+          {
+            "feature": "tfidf_bro",
+            "shap_value": -0.6413,
+            "input_value": 0.0
+          }
+        ],
+        "all_top_k": [
+          {
+            "feature": "ratio_specials",
+            "shap_value": 1.6228,
+            "input_value": 0.7689
+          },
+          {
+            "feature": "ratio_single_quote",
+            "shap_value": 1.1402,
+            "input_value": 0.977
+          },
+          {
+            "feature": "ratio_space",
+            "shap_value": 0.9389,
+            "input_value": 3.4427
+          },
+          {
+            "feature": "ratio_uppers",
+            "shap_value": 0.6864,
+            "input_value": 5.4308
+          },
+          {
+            "feature": "tfidf_bro",
+            "shap_value": -0.6413,
+            "input_value": 0.0
+          },
+          {
+            "feature": "tfidf_arri",
+            "shap_value": 0.6303,
+            "input_value": 0.0
+          }
+        ]
+      },
+      "token_attribution": {
+        "base_malicious_score": 0.9999,
+        "top_attack_tokens": [],
+        "highlighted_html": "/tienda1/publico/anadir.jsp ?id=1&#x27; UNION SELECT username,password FROM usuarios--"
+      }
+    },
+    "XSS": {
+      "request_url": "http://localhost:8080/tienda1/miembros/editar.jsp HTTP/1.1",
+      "model_malicious_probability": 0.9999,
+      "verdict": "BLOCK",
+      "shap_attribution": {
+        "base_value": 0.5413,
+        "top_contributing_features": [
+          {
+            "feature": "ratio_specials",
+            "shap_value": 1.9173,
+            "input_value": 1.4511
+          },
+          {
+            "feature": "ratio_single_quote",
+            "shap_value": 1.1536,
+            "input_value": 2.144
+          },
+          {
+            "feature": "count_slash",
+            "shap_value": 0.7436,
+            "input_value": 0.8841
+          },
+          {
+            "feature": "avg_param_length",
+            "shap_value": 0.5751,
+            "input_value": 1.529
+          },
+          {
+            "feature": "tfidf_gin=",
+            "shap_value": 0.5463,
+            "input_value": 0.0672
+          },
+          {
+            "feature": "tfidf_arri",
+            "shap_value": 0.5284,
+            "input_value": 0.0
+          }
+        ],
+        "benign_stabilizing_features": [],
+        "all_top_k": [
+          {
+            "feature": "ratio_specials",
+            "shap_value": 1.9173,
+            "input_value": 1.4511
+          },
+          {
+            "feature": "ratio_single_quote",
+            "shap_value": 1.1536,
+            "input_value": 2.144
+          },
+          {
+            "feature": "count_slash",
+            "shap_value": 0.7436,
+            "input_value": 0.8841
+          },
+          {
+            "feature": "avg_param_length",
+            "shap_value": 0.5751,
+            "input_value": 1.529
+          },
+          {
+            "feature": "tfidf_gin=",
+            "shap_value": 0.5463,
+            "input_value": 0.0672
+          },
+          {
+            "feature": "tfidf_arri",
+            "shap_value": 0.5284,
+            "input_value": 0.0
+          }
+        ]
+      },
+      "token_attribution": {
+        "base_malicious_score": 0.9999,
+        "top_attack_tokens": [],
+        "highlighted_html": "/tienda1/miembros/editar.jsp modo=registro&amp;login=bob@&lt;script&gt;alert(&#x27;XSS&#x27;)&lt;/script&gt;"
+      }
+    },
+    "BENIGN": {
+      "request_url": "http://localhost:8080/tienda1/publico/pagar.jsp?modo=insertar&precio=3714&B1=Confirmar HTTP/1.1",
+      "model_malicious_probability": 0.0377,
+      "verdict": "ALLOW",
+      "shap_attribution": {
+        "base_value": 0.5413,
+        "top_contributing_features": [
+          {
+            "feature": "tfidf_arri",
+            "shap_value": 0.779,
+            "input_value": 0.0
+          },
+          {
+            "feature": "tfidf_adi",
+            "shap_value": 0.4753,
+            "input_value": 0.0
+          }
+        ],
+        "benign_stabilizing_features": [
+          {
+            "feature": "ratio_uppers",
+            "shap_value": -1.1932,
+            "input_value": -0.4715
+          },
+          {
+            "feature": "tfidf_id=",
+            "shap_value": -0.6955,
+            "input_value": 0.0
+          },
+          {
+            "feature": "avg_param_length",
+            "shap_value": -0.4552,
+            "input_value": -0.1652
+          },
+          {
+            "feature": "count_slash",
+            "shap_value": -0.4198,
+            "input_value": -0.4594
+          }
+        ],
+        "all_top_k": [
+          {
+            "feature": "ratio_uppers",
+            "shap_value": -1.1932,
+            "input_value": -0.4715
+          },
+          {
+            "feature": "tfidf_arri",
+            "shap_value": 0.779,
+            "input_value": 0.0
+          },
+          {
+            "feature": "tfidf_id=",
+            "shap_value": -0.6955,
+            "input_value": 0.0
+          },
+          {
+            "feature": "tfidf_adi",
+            "shap_value": 0.4753,
+            "input_value": 0.0
+          },
+          {
+            "feature": "avg_param_length",
+            "shap_value": -0.4552,
+            "input_value": -0.1652
+          },
+          {
+            "feature": "count_slash",
+            "shap_value": -0.4198,
+            "input_value": -0.4594
+          }
+        ]
+      },
+      "token_attribution": {
+        "base_malicious_score": 0.6267,
+        "top_attack_tokens": [
+          {
+            "token": "/",
+            "importance_score": 0.5707
+          },
+          {
+            "token": "=",
+            "importance_score": 0.1759
+          }
+        ],
+        "highlighted_html": "<span style=\"background-color: #ff7675; color: #2d3436; font-weight: bold; padding: 2px 4px; border-radius: 3px;\">/</span>tienda1/publico/pagar.jsp<span style=\"background-color: #ff7675; color: #2d3436; font-weight: bold; padding: 2px 4px; border-radius: 3px;\"> </span>?modo<span style=\"background-color: #ff7675; color: #2d3436; font-weight: bold; padding: 2px 4px; border-radius: 3px;\">=</span>insertar&amp;precio=3714&amp;B1=Confirmar"
+      }
+    }
+  }
+}

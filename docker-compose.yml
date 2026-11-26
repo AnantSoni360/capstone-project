@@ -1,0 +1,132 @@
+# ==============================================================================
+# AI-Based Web Application Firewall (WAF) - Docker Architecture
+# Dual-network topology enforcing complete isolation of protected upstream services
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. Detection Backend: PyTorch 1D-CNN + XGBoost + Rule Engine (FastAPI)
+  # ----------------------------------------------------------------------------
+  waf_service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    image: ai-waf-backend:latest
+    container_name: waf_service
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WAF_FAIL_OPEN=false
+      - WAF_MODEL_SELECTION=1d_cnn
+      - WAF_BLOCK_THRESHOLD=0.70
+      - WAF_REVIEW_THRESHOLD=0.35
+    volumes:
+      - waf_audit_data:/app/backend
+    networks:
+      - waf_internal
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+    restart: unless-stopped
+
+  # ----------------------------------------------------------------------------
+  # 2. Protected Upstream Application: "ABC Shopping" Mock E-Commerce
+  # CRITICAL SECURITY GUARANTEE: Zero host ports mapped. Accessible ONLY via WAF.
+  # ----------------------------------------------------------------------------
+  protected_app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.target
+    image: ai-waf-target-app:latest
+    container_name: protected_app
+    volumes:
+      - target_logs:/app/backend
+    networks:
+      - waf_internal
+    # Notice: NO "ports:" mapping here! Direct host access is physically blocked.
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  # ----------------------------------------------------------------------------
+  # 3. Gateway Reverse Proxy: Nginx Auth-Request Enforcer
+  # Public entrypoint for all incoming HTTP traffic
+  # ----------------------------------------------------------------------------
+  nginx_proxy:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.proxy
+    image: ai-waf-nginx-proxy:latest
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+      - "8080:80"
+    networks:
+      - waf_public
+      - waf_internal
+    depends_on:
+      waf_service:
+        condition: service_healthy
+      protected_app:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ----------------------------------------------------------------------------
+  # 4. Streamlit Security Operations Center (SOC) Console
+  # Real-time incident telemetry, SHAP/LIME explainability, and rule inspection
+  # ----------------------------------------------------------------------------
+  waf_dashboard:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dashboard
+    image: ai-waf-dashboard:latest
+    container_name: waf_dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      - WAF_BACKEND_URL=http://waf_service:8000
+    volumes:
+      - waf_audit_data:/app/backend:ro
+    networks:
+      - waf_public
+      - waf_internal
+    depends_on:
+      waf_service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+
+# ==============================================================================
+# Isolated Network Architecture
+# ==============================================================================
+networks:
+  # Public ingress network: Exposes ports 80/8080 (Nginx) and 8501 (SOC Dashboard)
+  waf_public:
+    name: waf_public
+    driver: bridge
+
+  # Strictly isolated internal network: Protected application & FastAPI backend
+  # External clients cannot reach these containers directly.
+  waf_internal:
+    name: waf_internal
+    driver: bridge
+
+# ==============================================================================
+# Persistent Volumes
+# ==============================================================================
+volumes:
+  waf_audit_data:
+    name: waf_audit_data
+  target_logs:
+    name: target_logs

@@ -1,0 +1,26 @@
+{
+  "Traditional_Rules": {
+    "baseline_clean": 1.0,
+    "double_url_encoding": 1.0,
+    "comment_injection": 1.0,
+    "mixed_casing": 1.0,
+    "whitespace_substitution": 1.0,
+    "equivalent_tautologies": 1.0
+  },
+  "XGBoost": {
+    "baseline_clean": 1.0,
+    "double_url_encoding": 1.0,
+    "comment_injection": 1.0,
+    "mixed_casing": 1.0,
+    "whitespace_substitution": 1.0,
+    "equivalent_tautologies": 1.0
+  },
+  "PyTorch_1D_CNN": {
+    "baseline_clean": 1.0,
+    "double_url_encoding": 1.0,
+    "comment_injection": 1.0,
+    "mixed_casing": 1.0,
+    "whitespace_substitution": 1.0,
+    "equivalent_tautologies": 1.0
+  }
+}

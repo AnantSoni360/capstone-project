@@ -1,0 +1,75 @@
+{
+  "PyTorch_MLP": {
+    "accuracy": 0.8245,
+    "precision": 0.8654,
+    "recall": 0.8509,
+    "f1_score": 0.8581,
+    "roc_auc": 0.9242,
+    "pr_auc": 0.9569,
+    "false_positive_rate": 0.2192,
+    "false_negative_rate": 0.1491,
+    "latency_ms": 0.184,
+    "confusion_matrix": {
+      "true_negatives": 1129,
+      "false_positives": 317,
+      "false_negatives": 357,
+      "true_positives": 2038
+    },
+    "training_time_seconds": 6.68
+  },
+  "PyTorch_1D_CNN": {
+    "accuracy": 0.9388,
+    "precision": 0.9941,
+    "recall": 0.9073,
+    "f1_score": 0.9487,
+    "roc_auc": 0.9878,
+    "pr_auc": 0.994,
+    "false_positive_rate": 0.009,
+    "false_negative_rate": 0.0927,
+    "latency_ms": 0.893,
+    "confusion_matrix": {
+      "true_negatives": 1433,
+      "false_positives": 13,
+      "false_negatives": 222,
+      "true_positives": 2173
+    },
+    "training_time_seconds": 115.72
+  },
+  "PyTorch_BiLSTM": {
+    "accuracy": 0.6821,
+    "precision": 0.785,
+    "recall": 0.6752,
+    "f1_score": 0.7259,
+    "roc_auc": 0.7722,
+    "pr_auc": 0.8811,
+    "false_positive_rate": 0.3064,
+    "false_negative_rate": 0.3248,
+    "latency_ms": 3.388,
+    "confusion_matrix": {
+      "true_negatives": 1003,
+      "false_positives": 443,
+      "false_negatives": 778,
+      "true_positives": 1617
+    },
+    "training_time_seconds": 125.04
+  },
+  "PyTorch_Autoencoder": {
+    "accuracy": 0.7092,
+    "precision": 0.9885,
+    "recall": 0.5399,
+    "f1_score": 0.6984,
+    "roc_auc": 0.8441,
+    "pr_auc": 0.9146,
+    "false_positive_rate": 0.0104,
+    "false_negative_rate": 0.4601,
+    "latency_ms": 0.145,
+    "confusion_matrix": {
+      "true_negatives": 1431,
+      "false_positives": 15,
+      "false_negatives": 1102,
+      "true_positives": 1293
+    },
+    "training_time_seconds": 3.82,
+    "calibrated_threshold": 0.0099
+  }
+}
