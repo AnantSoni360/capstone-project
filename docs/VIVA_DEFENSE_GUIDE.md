@@ -129,3 +129,12 @@ $$\phi_i(x) = \sum_{S \subseteq F \setminus \{i\}} \frac{|S|!(|F| - |S| - 1)!}{|
 | **Benign Clean Pass Rate (N=1,447)** | **99.59% (1,441 / 1,447 passed, FPR: 0.41%)** |
 | **Average Single Inspection Latency** | **5.56 ms** (SLA Budget: < 15.0 ms) |
 | **Unit & Integration Test Suite** | **62 / 62 Tests Passing (100%)** |
+| **Live Streamlit Cloud Dashboard** | **https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/** |
+
+---
+
+## 5. Live System Demonstration & Cloud Links
+
+- **Live Streamlit SOC Dashboard (Cloud):** [https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/](https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/)
+- **GitHub Source Repository:** [https://github.com/AnantSoni360/capstone-project](https://github.com/AnantSoni360/capstone-project)
+- **Local Deployment Gateway:** `http://localhost:80` (Nginx Gateway) / `http://localhost:8501` (Local Streamlit SOC)

@@ -1,16 +1,19 @@
 # 🛡️ AI-Based Web Application Firewall (AI-WAF)
 ### An Autonomous, Low-Latency Defense-in-Depth Gateway for Modern Web Application Security
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit%20Cloud-FF4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white)](https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/)
 [![Tests](https://img.shields.io/badge/pytest-62%20passed-brightgreen.svg)](tests/)
 [![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.14%20CPU%2FCUDA-orange.svg)](https://pytorch.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-Tabular%20Engine-green.svg)](https://xgboost.readthedocs.io/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-High--Throughput%20API-teal.svg)](https://fastapi.tiangolo.com/)
 [![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy%20auth__request-009639.svg)](https://nginx.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-SOC%20Dashboard-red.svg)](https://streamlit.io/)
 [![Docker](https://img.shields.io/badge/Docker-Compose%20v2-blue.svg)](docker-compose.yml)
 [![Institution](https://img.shields.io/badge/Institution-K.R.%20Mangalam%20University-gold.svg)](https://www.krmangalam.edu.in/)
 [![Degree](https://img.shields.io/badge/Degree-B.Tech%20Capstone%20Project-purple.svg)](#academic-attribution)
+
+> 🚀 **Live Interactive Demo:** The Security Operations Center (SOC) dashboard is deployed and publicly accessible on Streamlit Cloud at **[https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/](https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/)**.
 
 ---
 
@@ -28,6 +31,8 @@ Modern web applications face an unprecedented volume of polymorphic and obfuscat
 ---
 
 ## 🖥️ Live Security Operations Center (SOC) Dashboard
+
+🔗 **Cloud Deployment URL:** [https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/](https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/)
 
 The system features an interactive, real-time Security Operations Center (SOC) monitoring console with dynamic dark/light mode, live incident telemetry, and an interactive payload inspector.
 
@@ -247,10 +252,12 @@ curl -i "http://localhost:80/?q=%3Cscript%3Ealert('XSS')%3C/script%3E"
 ```
 
 ### 3. Access the SOC Dashboard
-Open your browser and navigate to:
-```
-http://localhost:8501
-```
+* **Public Cloud Demo (No installation required):** Access directly at:
+  👉 **[https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/](https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/)**
+* **Local Docker Deployment:** Open your browser and navigate to:
+  ```
+  http://localhost:8501
+  ```
 - Inspect real-time traffic statistics and threat breakdowns.
 - Use the **Interactive Payload Scanner** to analyze custom payloads with live SHAP attribution.
 - Switch between **Dark and Light Themes** using the sidebar control.

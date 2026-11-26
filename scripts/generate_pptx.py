@@ -932,7 +932,7 @@ def build_slide_17(prs, layout):
     img_path = os.path.join(FIG_DIR, "dashboard_soc_screenshot.png")
     add_image_card(slide, Inches(6.7), Inches(1.75), Inches(5.833), Inches(5.15), img_path,
                    title="Live Security Operations Center Dashboard",
-                   caption="Streamlit SOC overview: Telemetry counters, threat breakdown, and SLA compliance gauges.")
+                   caption="Live Cloud App: https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/")
 
     add_footer(slide, 17)
 
@@ -1061,6 +1061,15 @@ def build_slide_20(prs, layout):
     p_vf.font.color.rgb = TEXT_MUTED
     p_vf.alignment = PP_ALIGN.CENTER
     p_vf.space_before = Pt(4)
+
+    p_vurl = tf_v.add_paragraph()
+    p_vurl.text = "Live Streamlit Cloud Deployment: https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/"
+    p_vurl.font.name = "Calibri"
+    p_vurl.font.size = Pt(9.5)
+    p_vurl.font.bold = True
+    p_vurl.font.color.rgb = GOLDEN_DARK
+    p_vurl.alignment = PP_ALIGN.CENTER
+    p_vurl.space_before = Pt(3)
 
     add_footer(slide, 20)
 
