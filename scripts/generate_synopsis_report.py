@@ -793,35 +793,35 @@ The complete AI-WAF cascaded system was rigorously evaluated on the deduplicated
     <tbody>
         <tr>
             <td>Regex Rule Baseline (OWASP CRS Heuristic)</td>
-            <td style="text-align: center;">78.45%</td>
-            <td style="text-align: center;">91.20%</td>
-            <td style="text-align: center;">72.10%</td>
-            <td style="text-align: center;">4.80%</td>
-            <td style="text-align: center;"><strong>0.42 ms</strong></td>
+            <td style="text-align: center;">51.33%</td>
+            <td style="text-align: center;">100.00%</td>
+            <td style="text-align: center;">21.92%</td>
+            <td style="text-align: center;">0.00%</td>
+            <td style="text-align: center;"><strong>0.11 ms</strong></td>
         </tr>
         <tr>
-            <td>Random Forest (42 Features)</td>
-            <td style="text-align: center;">94.82%</td>
-            <td style="text-align: center;">99.45%</td>
-            <td style="text-align: center;">92.15%</td>
-            <td style="text-align: center;">0.52%</td>
-            <td style="text-align: center;">1.85 ms</td>
+            <td>Random Forest (42 Lexical Features)</td>
+            <td style="text-align: center;">88.96%</td>
+            <td style="text-align: center;">96.12%</td>
+            <td style="text-align: center;">85.76%</td>
+            <td style="text-align: center;">5.74%</td>
+            <td style="text-align: center;">37.74 ms</td>
         </tr>
         <tr>
-            <td>XGBoost Classifier (42 Features)</td>
-            <td style="text-align: center;">94.95%</td>
-            <td style="text-align: center;">99.58%</td>
-            <td style="text-align: center;">92.28%</td>
-            <td style="text-align: center;">0.48%</td>
-            <td style="text-align: center;">2.10 ms</td>
+            <td>XGBoost Classifier (42 Lexical Features)</td>
+            <td style="text-align: center;">90.94%</td>
+            <td style="text-align: center;">96.42%</td>
+            <td style="text-align: center;">88.77%</td>
+            <td style="text-align: center;">5.46%</td>
+            <td style="text-align: center;">0.85 ms</td>
         </tr>
         <tr>
-            <td>Deep Learning Bi-LSTM (Character Sequence)</td>
-            <td style="text-align: center;">93.85%</td>
-            <td style="text-align: center;">97.80%</td>
-            <td style="text-align: center;">91.40%</td>
-            <td style="text-align: center;">1.85%</td>
-            <td style="text-align: center;">28.40 ms</td>
+            <td>Deep Learning (PyTorch 1D-CNN Sequence)</td>
+            <td style="text-align: center;">94.35%</td>
+            <td style="text-align: center;">99.86%</td>
+            <td style="text-align: center;">91.06%</td>
+            <td style="text-align: center;">0.21%</td>
+            <td style="text-align: center;">0.87 ms</td>
         </tr>
         <tr style="background-color: #eafaf1; font-weight: bold;">
             <td><strong>Full Cascaded AI-WAF Ensemble (Proposed)</strong></td>
