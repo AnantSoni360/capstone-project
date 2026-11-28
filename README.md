@@ -35,11 +35,11 @@ Modern web applications face an unprecedented volume of polymorphic and obfuscat
 
 🔗 **Cloud Deployment URL:** [https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/](https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/)
 
-The system features an interactive, real-time Security Operations Center (SOC) monitoring console with dynamic dark/light mode, live incident telemetry, and an interactive payload inspector.
+The system features an interactive, real-time Security Operations Center (SOC) monitoring console with dynamic theme selection, live incident telemetry, an interactive payload inspector, and the newly integrated **LLM Prompt Injection & Jailbreak Defense Shield**.
 
 ![Security Operations Center Dashboard](reports/figures/dashboard_soc_screenshot.png)
 
-*Figure 1: Real-time SOC Overview showing total inspected traffic, legitimate allow rates, blocked attack volume, threat vector breakdown, and inline latency budget compliance (< 15.0 ms SLA).*
+*Figure 1: Real-time SOC Overview deployed live on Streamlit Cloud, featuring the LLM Prompt Injection Shield navigation tab, threat vector breakdown, and sub-15ms latency telemetry.*
 
 ---
 
