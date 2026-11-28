@@ -9,9 +9,17 @@
 - **Project Title:** Comparative Analysis of Traditional and AI-Driven Threat Detection Techniques in Cybersecurity
 - **Artifact:** AI-Based Web Application Firewall for Injection & Anomaly Detection (AI-WAF)
 - **Course:** AI in Cybersecurity (B.Tech Capstone Project)
-- **Target Threats:** SQL Injection (SQLi), Cross-Site Scripting (XSS), Parameter Tampering, CRLF Injection, Zero-Day Evasion Mutations
+- **Institution:** School of Engineering & Technology (SOET), **K.R. Mangalam University**, Gurugram, Haryana
+- **Project Supervisor / Faculty Guide:** **Ms. Deepika Garg**, Assistant Professor, Department of Computer Science & Engineering
+- **Project Team Members:**
+  1. **Anant Soni** (Roll No: **2301730095**)
+  2. **Pabitra Giri** (Roll No: **2301730081**)
+  3. **Anurag Pandey** (Roll No: **2301730094**)
+  4. **Saksham Pachauri** (Roll No: **2301730060**)
+  5. **Piyush Gauswami** (Roll No: **2301730062**)
+- **Target Threats:** SQL Injection (SQLi), Cross-Site Scripting (XSS), Parameter Tampering, CRLF Injection, GenAI Prompt Injection (OWASP LLM01), Zero-Day Evasion Mutations
 - **System Architecture:** Nginx Subrequest Gateway + FastAPI Multi-Model Decision Backend + Dual-Network Docker Isolation + Streamlit SOC Monitoring Console
-- **Key Models:** PyTorch 1D-CNN (Sequence Deep Learning) + XGBoost (Domain Features) + Traditional Regex Signatures
+- **Key Models:** PyTorch 1D-CNN (Sequence Deep Learning) + ONNX Runtime Acceleration + XGBoost (Domain Features) + Traditional Regex Signatures
 - **Evaluation Corpus:** Spanish National Research Council (CSIC 2010) HTTP Corpus (25,608 unique records, 0% cross-split leakage)
 
 ---
@@ -269,10 +277,18 @@ To quantify the exact performance contribution of each layer in our architecture
 4. **Transparent XAI:** Incorporated TreeSHAP and token occlusion sensitivity, providing actionable diagnostic evidence to SOC analysts.
 5. **Zero-Trust Reverse Proxy Enforcement:** Validated an Nginx subrequest architecture in Docker with zero host ports mapped to the target web application.
 
-### 15.2 Limitations & Future Work
-- **Grammar-Aware Lexing:** Integrating Abstract Syntax Tree (AST) tokenizers (such as Libinjection) would further improve disambiguation between natural language SQL discussions and executable SQL injection.
-- **Hardware Acceleration:** Compiling PyTorch models via ONNX Runtime with TensorRT would scale throughput beyond 5,000 requests/sec per server node.
-- **Online Continual Learning:** Implementing an automated feedback loop where analyst feedback on `REVIEW` requests periodically fine-tunes decision thresholds.
+### 15.2 Delivered Phase 15 Production Advancements (Future Scope Realized)
+Beyond the initial project requirements, five advanced production-grade modules originally projected as future scope have been engineered, empirically benchmarked, and merged into the active codebase, expanding our automated test suite to **86 unit tests (100% passing)**:
+1. **GenAI / LLM Prompt Injection & Jailbreak Shield (`src/llm_guard.py`):** Defends against OWASP LLM01 attacks (direct instruction overrides, DAN 11.0 jailbreaks, system prompt exfiltration, ChatML delimiter boundary smuggling, and Base64-obfuscated injection) via FastAPI `POST /scan_llm` and the live Streamlit SOC Dashboard.
+2. **Grammar-Aware AST Lexer (`src/ast_parser.py`):** A Libinjection-style structural tokenizer deconstructing SQL syntax into typed tokens (`SQL_KEYWORD`, `COMP_OP`, `STRING`, `COMMENT`), catching comment-interleaved keywords (`UNION/**/SELECT`), tautological comparisons (`'1'='1'`, `2>1`), and quote breakouts.
+3. **ONNX Runtime Hardware Acceleration Engine (`src/onnx_engine.py` & `models/model_1d_cnn.onnx`):** Compiling our character-level PyTorch 1D-CNN into standard ONNX with `ORT_ENABLE_ALL` optimizations, slashing steady-state latency to **1.64 ms** and boosting throughput to **606.7 requests/sec** (a 3.4x throughput leap).
+4. **Automated Adversarial Mutation Fuzzer (`src/adversarial_fuzzer.py`):** A genetic WAF-A-MoLE style fuzzer with 8 syntactic mutation operators (casing, comment splicing, double encoding, whitespace jitter, hex, null-bytes, HTML entities, tautologies) for continuous zero-day robustness auditing.
+5. **Active Continuous Learning & SOC Feedback Loop (`src/active_learning.py`):** A human-in-the-loop analyst feedback store (`backend/active_learning.db`) paired with dynamic threshold recalibration (`POST /feedback/recalibrate`) to continuously suppress recurring false positives without service interruption.
+
+### 15.3 Production Roadmap & Long-Term Extensions
+- **Kubernetes Sidecar Proxy Mesh:** Packaging AI-WAF as an Envoy HTTP filter sidecar for distributed microservice meshes (Istio/Linkerd).
+- **eBPF In-Kernel Fast-Path Drops:** Migrating deterministic heuristic drops into Linux kernel space via extended Berkeley Packet Filters (eBPF) for sub-microsecond packet rejection.
+- **Distributed State Synchronization:** Integrating a Redis cache layer for cross-region IP rate limiting and synchronized threat intelligence across multiple WAF gateway nodes.
 
 ---
 

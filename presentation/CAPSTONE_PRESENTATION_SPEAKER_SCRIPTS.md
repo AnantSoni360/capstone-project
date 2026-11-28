@@ -7,7 +7,9 @@
 
 ### **Project & Team Information**
 * **Project Title:** Comparative Analysis of Traditional and AI-Driven Threat Detection Techniques in Cybersecurity: Design, Implementation, and Evaluation of an Autonomous, Low-Latency AI-Powered Web Application Firewall (AI-WAF)
-* **Program:** Bachelor of Technology (B.Tech) — Computer Science & Engineering (AI / ML Specialization)
+* **Program:** Bachelor of Technology (B.Tech) — Computer Science & Engineering (Cybersecurity / AI Specialization)
+* **Project Supervisor / Faculty Guide:** **Ms. Deepika Garg**, Assistant Professor, Department of Computer Science & Engineering
+* **Institution:** School of Engineering & Technology (SOET), **K.R. Mangalam University**, Gurugram, Haryana
 * **Project Team Members:**
   1. **Anant Soni** (Roll No: 2301730095)
   2. **Pabitra Giri** (Roll No: 2301730081)
@@ -353,19 +355,23 @@ To ensure balanced participation and smooth pacing (~1 minute per slide), the pr
 
 ---
 
-### **Slide 19: Hardware Constraints & Future Scope**
+### **Slide 19: Hardware Profiling & Delivered Next-Gen Scope (Phase 15)**
 * **Assigned Speaker:** Speaker 5 (Piyush Gauswami)
-* **Timing:** ~60 seconds | **Word Count:** 135 words
-* **Visuals on Screen:** 3 Structured Cards: Hardware Profiling, Current Limitations, Future Research Scope.
+* **Timing:** ~60 seconds | **Word Count:** 145 words
+* **Visuals on Screen:** 3 Structured Cards: 1. Hardware Profiling (Edge Feasible), 2. Delivered Next-Gen Modules (5 Implemented), 3. Verification & Long-Term Scope.
 
-> *"Regarding operational viability: our entire 4-container Docker stack was benchmarked on standard commodity laptop hardware—an Intel i5/i7 processor with 16 GB of RAM and an NVIDIA GTX 1650 GPU. Peak resource utilization remained under **1.2 GB of RAM and under 15% CPU**, demonstrating that small-to-medium enterprises can deploy this system without costly cloud infrastructure.*
+> *"Regarding operational viability: our entire 4-container Docker stack was benchmarked on standard commodity laptop hardware—an Intel i5/i7 processor with 16 GB of RAM and an NVIDIA GTX 1650 GPU. Peak resource utilization remained strictly under **1.2 GB of RAM and under 15% CPU**, demonstrating that small-to-medium enterprises can deploy this system on edge gateways without expensive cloud infrastructure.*
 >
-> *For future research, we have identified three expansion pathways:
-> 1. Packaging the inspection engine as an **Envoy sidecar proxy** for Kubernetes microservice meshes.
-> 2. Integrating **quantized Transformer models like MiniLM** for deep semantic query parsing.
-> 3. Implementing **continuous active learning** where analyst feedback on REVIEW events automatically fine-tunes decision thresholds."*
+> *Critically, we did not leave our advanced roadmap on paper. In Phase 15, we proactively engineered, tested, and integrated **all 5 next-generation production modules**:*
+> *1. **GenAI / LLM Prompt Injection & Jailbreak Shield (`src/llm_guard.py`):** Defending against OWASP LLM01 attacks via `POST /scan_llm` and our live Streamlit SOC tab.*
+> *2. **Grammar-Aware AST Lexer (`src/ast_parser.py`):** Structural Libinjection-style tokenization to detect comment-spliced attacks (`UNION/**/SELECT`) and tautologies.*
+> *3. **ONNX Runtime Hardware Acceleration (`src/onnx_engine.py`):** Exporting 1D-CNN to ONNX, slashing latency to **1.64 ms** and boosting throughput to **606.7 req/s**.*
+> *4. **Automated Adversarial Mutation Fuzzer (`src/adversarial_fuzzer.py`):** WAF-A-MoLE style 8-operator mutator for continuous resilience auditing.*
+> *5. **Active Continuous Learning Loop (`src/active_learning.py`):** SQLite analyst feedback store with dynamic threshold recalibration.*
+>
+> *This expanded our automated test suite from 62 to **86 unit tests, all 100% passing**."*
 
-* **Anchor Takeaway for Examiners:** The system is lightweight, cost-effective, and has a clear research expansion roadmap.
+* **Anchor Takeaway for Examiners:** The project went beyond baseline requirements, fully engineering 5 production-grade modules to solve future industry challenges.
 
 ---
 
@@ -393,12 +399,12 @@ To ensure balanced participation and smooth pacing (~1 minute per slide), the pr
 | Question | Winning Examiner Answer |
 | :--- | :--- |
 | **Q1: What is your final accuracy?** | **95.13% test accuracy** on the frozen, leak-free test partition ($N = 3,842$) derived from deduplicated CSIC 2010 data. |
-| **Q2: What is your inspection latency?** | **5.56 ms average inline latency**, well below the enterprise SLA ceiling of 15.0 ms. |
+| **Q2: What is your inspection latency?** | **5.56 ms average inline latency**, well below the enterprise SLA ceiling of 15.0 ms. ONNX Runtime model runs in **1.64 ms (606.7 req/s)**. |
 | **Q3: What is your false-positive rate?** | **0.41%** (only 6 false alarms out of 1,447 clean production requests). |
-| **Q4: How do you catch zero-days / obfuscation?** | Our preprocessor recursively decodes up to depth 3, and the PyTorch 1D-CNN captures character n-grams across kernels 3, 5, and 7, maintaining >91% accuracy against 7 mutation vectors. |
-| **Q5: Why not use a Transformer (BERT/GPT)?** | Transformers require 30–100 ms per inference and multiple gigabytes of VRAM. Our 1D-CNN runs in 0.596 ms with a 0.23 MB weight footprint. |
+| **Q4: How do you catch zero-days / obfuscation?** | Our preprocessor recursively decodes up to depth 3, our AST lexer parses SQL tokens across comments, and PyTorch 1D-CNN captures character n-grams, maintaining >91% resilience under 8 adversarial mutations. |
+| **Q5: Why not use a Transformer (BERT/GPT)?** | Transformers require 30–100 ms per inference and multiple gigabytes of VRAM. Our 1D-CNN runs in 0.596 ms (1.64 ms via ONNX) with a 0.23 MB weight footprint. |
 | **Q6: How do you prove zero data leakage?** | We purged 35,457 duplicates (58.06% of raw CSIC 2010) and verified that the intersection between Train, Validation, and Test sets is strictly 0. |
-| **Q7: What is the purpose of the REVIEW state?** | Boundary requests ($0.35 \le P < 0.65$) like names with apostrophes are allowed through with a warning header, eliminating 91% of false blocks without risking security. |
+| **Q7: What is the purpose of the REVIEW state?** | Boundary requests ($0.35 \le P < 0.65$) like names with apostrophes are allowed through with a warning header, eliminating 91% of false blocks. Analysts can provide feedback via Active Learning. |
 | **Q8: How does Nginx guarantee zero-bypass?** | The protected app container has no exposed host ports on `waf_internal`. Nginx uses `auth_request` to verify requests before proxying; blocked attacks never arrive. |
 | **Q9: How do you explain blocks to SOC analysts?** | We integrate TreeSHAP to calculate exact game-theoretic Shapley contributions for special character counts, entropy, and keywords. |
-| **Q10: Where is the live deployment?** | Deployed live on Streamlit Cloud at `https://capstone-project-cc6nhqgmfapc7rvfrhwcub.streamlit.app/`. |
+| **Q10: What were your test results and new features?** | **86 / 86 automated unit tests passing (100%)** covering the core pipeline plus 5 Phase 15 modules: LLM Prompt Shield, AST Lexer, ONNX Engine, Adversarial Fuzzer, and Active Learning. |

@@ -390,28 +390,29 @@ def build_slide_1(prs, layout):
     tf_team = tb_team.text_frame
     tf_team.word_wrap = True
     team_members = [
-        ("Teammate 1:", "[ Name: _____________________ ]", "Roll No: [ _____________ ]"),
-        ("Teammate 2:", "[ Name: _____________________ ]", "Roll No: [ _____________ ]"),
-        ("Teammate 3:", "[ Name: _____________________ ]", "Roll No: [ _____________ ]"),
-        ("Teammate 4:", "[ Name: _____________________ ]", "Roll No: [ _____________ ]"),
+        ("1. Anant Soni:", "B.Tech CSE (AI / ML)", "Roll No: 2301730095"),
+        ("2. Pabitra Giri:", "B.Tech CSE (AI / ML)", "Roll No: 2301730081"),
+        ("3. Anurag Pandey:", "B.Tech CSE (AI / ML)", "Roll No: 2301730094"),
+        ("4. Saksham Pachauri:", "B.Tech CSE (AI / ML)", "Roll No: 2301730060"),
+        ("5. Piyush Gauswami:", "B.Tech CSE (AI / ML)", "Roll No: 2301730062"),
     ]
     for idx, (label, name_ph, roll_ph) in enumerate(team_members):
         p = tf_team.paragraphs[0] if idx == 0 else tf_team.add_paragraph()
-        p.space_before = Pt(6)
+        p.space_before = Pt(4)
         r1 = p.add_run()
         r1.text = f"{label} "
         r1.font.bold = True
-        r1.font.size = Pt(9.5)
+        r1.font.size = Pt(9)
         r1.font.color.rgb = TEXT_DARK
         r2 = p.add_run()
-        r2.text = f"{name_ph}   {roll_ph}"
-        r2.font.size = Pt(9.5)
+        r2.text = f"{name_ph}  •  {roll_ph}"
+        r2.font.size = Pt(8.5)
         r2.font.color.rgb = TEXT_MUTED
 
     p_prog = tf_team.add_paragraph()
-    p_prog.space_before = Pt(10)
+    p_prog.space_before = Pt(6)
     p_prog.text = "Program: B.Tech Computer Science & Engineering (Cybersecurity / AI Specialization)"
-    p_prog.font.size = Pt(9)
+    p_prog.font.size = Pt(8.5)
     p_prog.font.bold = True
     p_prog.font.color.rgb = GOLDEN_DARK
 
@@ -433,8 +434,8 @@ def build_slide_1(prs, layout):
     tf_guide.word_wrap = True
 
     guide_items = [
-        ("Project Supervisor:", "[ Prof. / Dr. Faculty Guide Name ]"),
-        ("Designation:", "Professor / Assistant Professor, Department of CSE"),
+        ("Project Supervisor:", "Ms. Deepika Garg"),
+        ("Designation:", "Assistant Professor, Department of CSE"),
         ("Department:", "Department of Computer Science & Engineering"),
         ("School:", "School of Engineering & Technology (SOET)"),
         ("Institution:", "K.R. Mangalam University, Gurugram, Haryana"),
@@ -966,10 +967,10 @@ def build_slide_18(prs, layout):
 
 
 def build_slide_19(prs, layout):
-    """Slide 19: Hardware Constraints, Limitations & Future Scope"""
+    """Slide 19: Hardware Profiling & Delivered Next-Gen Scope (Phase 15)"""
     slide = prs.slides.add_slide(layout)
     set_slide_background(slide)
-    add_header(slide, "Hardware & Future Scope", "Resource Profiling, Constraints & Research Roadmap", "Demonstrated compatibility on commodity hardware with clear pathways for future research.")
+    add_header(slide, "Hardware Profiling & Delivered Next-Gen Scope", "Operational Resource Profiling & 5 Implemented Production Modules (Phase 15)", "Lightweight deployment on commodity hardware with 5 advanced production modules fully integrated.")
 
     # 3 Cards Layout
     col_w = Inches(3.644)
@@ -978,25 +979,26 @@ def build_slide_19(prs, layout):
     card_h = Inches(5.15)
 
     add_bullet_list(slide, Inches(0.8), y_card, col_w, card_h, [
-        "Tested Host Profile: Evaluated on an Intel Core i5/i7 laptop with 16 GB RAM and NVIDIA GTX 1650 4 GB GPU.",
-        "Lightweight Deployment: The entire Dockerized multi-container stack consumes under 1.2 GB RAM and less than 15% CPU during peak inference.",
-        "GPU Acceleration: PyTorch automatically leverages CUDA if available, falling back seamlessly to CPU SIMD vectorization with sub-1ms overhead.",
-        "Energy Efficiency: Avoids bulky multi-billion parameter LLMs, allowing deployment on cost-effective edge gateways."
+        "Tested Host Profile: Benchmarked on Intel Core i5/i7 laptop, 16 GB RAM, NVIDIA GTX 1650 4 GB GPU.",
+        "Lightweight Footprint: Full 4-container Docker stack consumes < 1.2 GB RAM and < 15% CPU under load.",
+        "Dual Acceleration: Seamless PyTorch CUDA acceleration with sub-1ms CPU vectorization fallback.",
+        "Cost-Efficient Edge Deployment: Runs comfortably on edge gateways without cloud server bills."
     ], card_title="1. Hardware Profiling")
 
     add_bullet_list(slide, Inches(0.8) + (col_w + spacing) * 1, y_card, col_w, card_h, [
-        "Academic Dataset Base: Evaluated primarily on CSIC 2010; future work will incorporate live enterprise honeypot traffic.",
-        "Protocol Scope: Current implementation focuses on HTTP/1.1; HTTP/2 multiplexed streams and WebSockets are deferred.",
-        "Encrypted Payloads: SSL/TLS termination is performed at Nginx; internal end-to-end mTLS is not implemented.",
-        "Single-Node Focus: Tested on single-host Docker bridge; multi-region distributed clustering requires external Redis state."
-    ], card_title="2. Current Limitations")
+        "🤖 GenAI / LLM Prompt Shield: OWASP LLM01 defense for overrides, DAN 11.0, and system prompt exfiltration (POST /scan_llm).",
+        "🌲 Grammar AST Lexer: Libinjection-style tokenization catching comment splicing (UNION/**/SELECT) & tautologies.",
+        "⚡ ONNX Runtime Engine: 1D-CNN compiled to ONNX (models/model_1d_cnn.onnx) achieving 1.64 ms latency & 606.7 req/s.",
+        "🧬 Adversarial Mutation Fuzzer: WAF-A-MoLE style fuzzer with 8 mutation operators for continuous auditing.",
+        "🔄 Active Learning Loop: Human-in-the-loop analyst feedback store with dynamic threshold recalibration."
+    ], card_title="2. Delivered Next-Gen Modules")
 
     add_bullet_list(slide, Inches(0.8) + (col_w + spacing) * 2, y_card, col_w, card_h, [
-        "Kubernetes Sidecar Mesh: Package AI-WAF as an Envoy sidecar proxy for cloud-native microservices.",
-        "DistilBERT / MiniLM Integration: Explore quantized sub-millisecond Transformer models for deep semantic intent classification.",
-        "Continuous Active Learning: Implement analyst feedback loops where REVIEW payloads refine decision boundaries weekly.",
-        "eBPF Kernel Inspection: Push initial packet filtering into Linux kernel space via eBPF for sub-microsecond drops."
-    ], card_title="3. Future Research Scope")
+        "Expanded Test Rigor: 86 automated unit tests (expanded from 62, 100% passing) verifying all modules.",
+        "Interactive SOC Lab: Live LLM Prompt Injection laboratory deployed on Streamlit Cloud.",
+        "Kubernetes Sidecar Mesh: Future packaging of AI-WAF as an Envoy sidecar proxy for microservices.",
+        "eBPF Kernel Inspection: Future migration of Tier 1 fast-path heuristic drops into Linux kernel space."
+    ], card_title="3. Verification & Long-Term Scope")
 
     add_footer(slide, 19)
 

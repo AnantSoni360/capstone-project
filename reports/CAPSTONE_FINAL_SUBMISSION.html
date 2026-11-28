@@ -122,9 +122,19 @@
 <li><strong>Project Title:</strong> Comparative Analysis of Traditional and AI-Driven Threat Detection Techniques in Cybersecurity</li>
 <li><strong>Artifact:</strong> AI-Based Web Application Firewall for Injection &amp; Anomaly Detection (AI-WAF)</li>
 <li><strong>Course:</strong> AI in Cybersecurity (B.Tech Capstone Project)</li>
-<li><strong>Target Threats:</strong> SQL Injection (SQLi), Cross-Site Scripting (XSS), Parameter Tampering, CRLF Injection, Zero-Day Evasion Mutations</li>
+<li><strong>Institution:</strong> School of Engineering &amp; Technology (SOET), <strong>K.R. Mangalam University</strong>, Gurugram, Haryana</li>
+<li><strong>Project Supervisor / Faculty Guide:</strong> <strong>Ms. Deepika Garg</strong>, Assistant Professor, Department of Computer Science &amp; Engineering</li>
+<li><strong>Project Team Members:</strong><ol>
+<li><strong>Anant Soni</strong> (Roll No: <strong>2301730095</strong>)</li>
+<li><strong>Pabitra Giri</strong> (Roll No: <strong>2301730081</strong>)</li>
+<li><strong>Anurag Pandey</strong> (Roll No: <strong>2301730094</strong>)</li>
+<li><strong>Saksham Pachauri</strong> (Roll No: <strong>2301730060</strong>)</li>
+<li><strong>Piyush Gauswami</strong> (Roll No: <strong>2301730062</strong>)</li>
+</ol>
+</li>
+<li><strong>Target Threats:</strong> SQL Injection (SQLi), Cross-Site Scripting (XSS), Parameter Tampering, CRLF Injection, GenAI Prompt Injection (OWASP LLM01), Zero-Day Evasion Mutations</li>
 <li><strong>System Architecture:</strong> Nginx Subrequest Gateway + FastAPI Multi-Model Decision Backend + Dual-Network Docker Isolation + Streamlit SOC Monitoring Console</li>
-<li><strong>Key Models:</strong> PyTorch 1D-CNN (Sequence Deep Learning) + XGBoost (Domain Features) + Traditional Regex Signatures</li>
+<li><strong>Key Models:</strong> PyTorch 1D-CNN (Sequence Deep Learning) + ONNX Runtime Acceleration + XGBoost (Domain Features) + Traditional Regex Signatures</li>
 <li><strong>Evaluation Corpus:</strong> Spanish National Research Council (CSIC 2010) HTTP Corpus (25,608 unique records, 0% cross-split leakage)</li>
 </ul>
 <hr />
@@ -762,11 +772,20 @@ Tokens with positive $\Delta \text{Risk} &gt; 0.15$ are rendered in high-visibil
 <li><strong>Transparent XAI:</strong> Incorporated TreeSHAP and token occlusion sensitivity, providing actionable diagnostic evidence to SOC analysts.</li>
 <li><strong>Zero-Trust Reverse Proxy Enforcement:</strong> Validated an Nginx subrequest architecture in Docker with zero host ports mapped to the target web application.</li>
 </ol>
-<h3>15.2 Limitations &amp; Future Work</h3>
+<h3>15.2 Delivered Phase 15 Production Advancements (Future Scope Realized)</h3>
+<p>Beyond the initial project requirements, five advanced production-grade modules originally projected as future scope have been engineered, empirically benchmarked, and merged into the active codebase, expanding our automated test suite to <strong>86 unit tests (100% passing)</strong>:</p>
+<ol>
+<li><strong>GenAI / LLM Prompt Injection &amp; Jailbreak Shield (<code>src/llm_guard.py</code>):</strong> Defends against OWASP LLM01 attacks (direct instruction overrides, DAN 11.0 jailbreaks, system prompt exfiltration, ChatML delimiter boundary smuggling, and Base64-obfuscated injection) via FastAPI <code>POST /scan_llm</code> and the live Streamlit SOC Dashboard.</li>
+<li><strong>Grammar-Aware AST Lexer (<code>src/ast_parser.py</code>):</strong> A Libinjection-style structural tokenizer deconstructing SQL syntax into typed tokens (<code>SQL_KEYWORD</code>, <code>COMP_OP</code>, <code>STRING</code>, <code>COMMENT</code>), catching comment-interleaved keywords (<code>UNION/**/SELECT</code>), tautological comparisons (<code>'1'='1'</code>, <code>2&gt;1</code>), and quote breakouts.</li>
+<li><strong>ONNX Runtime Hardware Acceleration Engine (<code>src/onnx_engine.py</code> &amp; <code>models/model_1d_cnn.onnx</code>):</strong> Compiling our character-level PyTorch 1D-CNN into standard ONNX with <code>ORT_ENABLE_ALL</code> optimizations, slashing steady-state latency to <strong>1.64 ms</strong> and boosting throughput to <strong>606.7 requests/sec</strong> (a 3.4x throughput leap).</li>
+<li><strong>Automated Adversarial Mutation Fuzzer (<code>src/adversarial_fuzzer.py</code>):</strong> A genetic WAF-A-MoLE style fuzzer with 8 syntactic mutation operators (casing, comment splicing, double encoding, whitespace jitter, hex, null-bytes, HTML entities, tautologies) for continuous zero-day robustness auditing.</li>
+<li><strong>Active Continuous Learning &amp; SOC Feedback Loop (<code>src/active_learning.py</code>):</strong> A human-in-the-loop analyst feedback store (<code>backend/active_learning.db</code>) paired with dynamic threshold recalibration (<code>POST /feedback/recalibrate</code>) to continuously suppress recurring false positives without service interruption.</li>
+</ol>
+<h3>15.3 Production Roadmap &amp; Long-Term Extensions</h3>
 <ul>
-<li><strong>Grammar-Aware Lexing:</strong> Integrating Abstract Syntax Tree (AST) tokenizers (such as Libinjection) would further improve disambiguation between natural language SQL discussions and executable SQL injection.</li>
-<li><strong>Hardware Acceleration:</strong> Compiling PyTorch models via ONNX Runtime with TensorRT would scale throughput beyond 5,000 requests/sec per server node.</li>
-<li><strong>Online Continual Learning:</strong> Implementing an automated feedback loop where analyst feedback on <code>REVIEW</code> requests periodically fine-tunes decision thresholds.</li>
+<li><strong>Kubernetes Sidecar Proxy Mesh:</strong> Packaging AI-WAF as an Envoy HTTP filter sidecar for distributed microservice meshes (Istio/Linkerd).</li>
+<li><strong>eBPF In-Kernel Fast-Path Drops:</strong> Migrating deterministic heuristic drops into Linux kernel space via extended Berkeley Packet Filters (eBPF) for sub-microsecond packet rejection.</li>
+<li><strong>Distributed State Synchronization:</strong> Integrating a Redis cache layer for cross-region IP rate limiting and synchronized threat intelligence across multiple WAF gateway nodes.</li>
 </ul>
 <hr />
 <h2>16. References</h2>

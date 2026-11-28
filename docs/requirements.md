@@ -18,6 +18,11 @@
 - **FR-07 (Explainable AI Diagnostics):** The system must generate human-interpretable explanations using SHAP (feature attribution) and LIME (character/token highlights) for flagged security events.
 - **FR-08 (Security Operations Dashboard):** A Streamlit-based monitoring console must display live traffic statistics, recent security incidents, an interactive manual request scanner, and model performance metrics.
 - **FR-09 (Sanitized Security Logging):** All incoming request metadata and scan results must be logged asynchronously to an audit database. Sensitive fields (passwords, authorization tokens, cookies) must be masked.
+- **FR-10 (GenAI / LLM Prompt Injection & Jailbreak Defense):** The system must inspect upstream LLM prompts for OWASP LLM01 threats (direct overrides, DAN jailbreaks, system prompt exfiltration, delimiter injection, Base64 smuggling) via dedicated `/scan_llm` endpoint and Streamlit SOC view.
+- **FR-11 (Grammar-Aware AST Tokenization):** The system must structurally deconstruct SQL payloads into lexical tokens to catch obfuscated keywords, comment interleaving (`UNION/**/SELECT`), and tautology expressions before statistical scoring.
+- **FR-12 (ONNX Runtime Hardware Acceleration):** Deep sequence neural models must be deployable via ONNX Runtime to minimize CPU latency (< 2.0 ms) and maximize throughput (> 600 RPS).
+- **FR-13 (Automated Adversarial Robustness Auditing):** The system must include an adversarial mutation fuzzer implementing 8 syntactic transformations to continuously evaluate bypass resilience.
+- **FR-14 (Active Learning & Analyst Feedback Loop):** The system must allow SOC analysts to submit feedback on reviewed requests and trigger dynamic threshold recalibration to continuously suppress false positives.
 
 ---
 
