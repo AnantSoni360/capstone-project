@@ -216,3 +216,14 @@ def get_active_rules():
         "rule_count": len(decision_engine.rule_engine.rules),
         "rules": decision_engine.rule_engine.rules
     }
+
+
+@app.post("/scan_llm", tags=["LLM Gateway"])
+def scan_llm_prompt(prompt: str):
+    """
+    Next-Gen AI Gateway Protection:
+    Scans user prompts for Prompt Injections, Jailbreaks, and System Prompt Exfiltration.
+    """
+    from src.llm_guard import LLMGuard
+    guard = LLMGuard()
+    return guard.scan_prompt(prompt)
