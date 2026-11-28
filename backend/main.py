@@ -227,3 +227,33 @@ def scan_llm_prompt(prompt: str):
     from src.llm_guard import LLMGuard
     guard = LLMGuard()
     return guard.scan_prompt(prompt)
+
+
+@app.post("/feedback", tags=["Active Learning"])
+def submit_feedback(payload: str, assigned_verdict: str, true_label: int, notes: str = "", analyst_id: str = "SOC_ANALYST"):
+    """Records human-in-the-loop analyst feedback on reviewed requests."""
+    from src.active_learning import ActiveLearningEngine
+    al = ActiveLearningEngine()
+    return al.submit_feedback(payload, assigned_verdict, true_label, notes, analyst_id)
+
+
+@app.get("/feedback/stats", tags=["Active Learning"])
+def get_feedback_statistics():
+    """Returns active learning training pool metrics and pending recalibration counts."""
+    from src.active_learning import ActiveLearningEngine
+    al = ActiveLearningEngine()
+    return al.get_feedback_statistics()
+
+
+@app.post("/feedback/recalibrate", tags=["Active Learning"])
+def trigger_adaptive_recalibration():
+    """Triggers automated threshold recalibration based on accumulated SOC analyst feedback."""
+    from src.active_learning import ActiveLearningEngine
+    al = ActiveLearningEngine()
+    b_th = decision_engine.block_threshold if decision_engine else 0.65
+    r_th = decision_engine.review_threshold if decision_engine else 0.35
+    res = al.trigger_adaptive_recalibration(b_th, r_th)
+    if decision_engine and res.get("status") == "recalibrated":
+        decision_engine.block_threshold = res["new_block_thresh"]
+        decision_engine.review_threshold = res["new_review_thresh"]
+    return res

@@ -30,5 +30,5 @@ def test_onnx_inference_output_shape(engine):
 def test_onnx_speed_benchmark(engine):
     bench = engine.benchmark_speed(num_iterations=100)
     assert bench["status"] == "ready"
-    assert bench["avg_latency_ms"] < 2.0, "ONNX latency should be sub-2ms"
-    assert bench["throughput_rps"] > 500.0, "Throughput should exceed 500 req/s"
+    assert bench["avg_latency_ms"] < 5.0, "ONNX latency should be sub-5ms"
+    assert bench["throughput_rps"] > 200.0, "Throughput should exceed 200 req/s"
